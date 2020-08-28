@@ -1,0 +1,23 @@
+.textForm{
+font-size: 20px;
+margin-bottom: 50px;
+}
+label{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+h3{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    background-color: greenyellow;
+}
+.config-input{
+    font-size: 20px;
+    color:blue;
+}
+.config-select{
+    font-size: 18px !important;
+    color:blue;
+}

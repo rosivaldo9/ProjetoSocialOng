@@ -1,0 +1,132 @@
+.top{
+    background-color:#0000CD;
+    height: 20%;
+    font-size: 25px;
+    height: 100px;
+}
+
+.aa{
+    color: white;
+}
+.a{
+    color: white;
+}
+.aa:hover{
+    color: red;
+}
+
+ul{
+    align-items: center;
+    justify-content: center;
+}
+.mr{ margin-right:5px ;}
+
+.sidebar{
+    background-color: #e3f2fd;
+    position: fixed;
+}
+.m{
+    background-color: LightGreen;
+    position: fixed;
+    height: 1800px;
+    z-index: 9999;
+}
+.n{
+    background-color:greenyellow;
+    height: 50px;
+    width: 80%;
+    position: fixed;
+    padding-right: 50px;
+    
+    z-index: 9999;
+   
+}
+.nn{
+    
+    position: absolute;
+    height: 180px;
+    width: 80%;
+    margin-top: 130px;
+}
+
+.main{
+    margin-right: 0px;
+    position: relative;
+}
+
+
+
+    
+
+.gbutões{
+    margin-top: 5px;
+}
+
+.t1{
+    margin-top: 90px;
+
+
+}
+.but{
+    border: 5px;
+    color: blue;
+    font-size: 20px;
+    background-color: LightGreen;
+}
+
+.but:hover{
+    background-image: linear-gradient(to bottom, DarkGreen, LimeGreen);
+    color: white;
+}
+
+
+
+.material-icons {
+    width: 20px;
+    overflow: hidden;
+    vertical-align: bottom;
+    margin-right: 10px;
+}
+
+.geral{
+    position: fixed;
+    height: 50px;
+    background-color: azure;
+}
+.t{
+    height: 200px;
+}
+
+.pn{
+    width: 90%;
+    margin-right: 20%;
+}
+
+.nn{
+
+    margin-top: 80px;
+}
+
+.botIndex:hover{
+    background-color: blue;
+    color: white;
+}
+.ulIdex{
+    background-color: turquoise;
+}
+
+.navconfig{
+    background-image: linear-gradient(to bottom, DarkGreen, LimeGreen);
+}
+
+.head{
+      background-image: linear-gradient(to bottom, GreenYellow, YellowGreen);
+      color: white;
+  }
+  .botIndex:hover{
+    background-image: linear-gradient(to bottom, DarkGreen, LimeGreen);
+    color: white;
+}
+.botIndex{
+    color: blue;
+}
