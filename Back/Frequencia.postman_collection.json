@@ -1,0 +1,137 @@
+{
+	"info": {
+		"_postman_id": "925a1aef-dda6-45a9-b465-f772013b27ac",
+		"name": "Frequencia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3003/sistema/Frequencia",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"data\": \"2020-09-10T15:24:39.304Z\",\n    \"alunos\": [\n       \"5f59201f7365d61fb65e6ca6\",\n        \"5f5928947365d61fb65e6cae\"\n    ],\n    \"turma\": \"5f5ff0f61103bd1257d0d713\"\n},\n{\n    \"data\": \"2020-09-10T15:24:39.304Z\",\n    \"alunos\": [\n       \"5f59201f7365d61fb65e6ca6\",\n    ],\n    \"turma\": \"5f5ff0f61103bd1257d0d712\"\n}\n\n\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/Frequencia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"Frequencia"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3003/sistema/Frequencia/5f5ff1bdef0f4412ca93d951",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n{\n    \"data\": \"2020-09-10T15:24:39.304Z\",\n    \"alunos\": [\n       \"5f59201f7365d61fb65e6ca6\",\n        \"5f5928947365d61fb65e6cae\"\n    ],\n    \"turma\": \"5f5ff0f61103bd1257d0d713\"\n},\n{\n    \"data\": \"2020-09-10T15:24:39.304Z\",\n    \"alunos\": [\n       \"5f59201f7365d61fb65e6ca6\"\n    ],\n    \"turma\": \"5f5ff0f61103bd1257d0d712\"\n}\n\n\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/Frequencia/5f5ff1bdef0f4412ca93d951",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"Frequencia",
+						"5f5ff1bdef0f4412ca93d951"
+					]
+				},
+				"description": "Detalhes"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3003/sistema/Frequencia/5f5ff1bdef0f4412ca93d951",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n     \"_id\": \"5f5ff1bdef0f4412ca93d951\",\n    \"data\": \"2020-09-14T15:24:39.304Z\",\n    \"alunos\": [\n       \"5f59201f7365d61fb65e6ca6\",\n        \"5f5928947365d61fb65e6cae\"\n    ],\n    \"turma\": \"5f5ff0f61103bd1257d0d713\"\n}\n\n\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/Frequencia/5f5ff1bdef0f4412ca93d951",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"Frequencia",
+						"5f5ff1bdef0f4412ca93d951"
+					]
+				},
+				"description": "Atualizar"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3003/sistema/Frequencia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"data\": \"2020-09-10T15:24:39.304Z\",\n    \"alunos\": [\n       \"5f59201f7365d61fb65e6ca6\",\n        \"5f5928947365d61fb65e6cae\"\n    ],\n    \"turma\": \"5f5ff0f61103bd1257d0d713\"\n},\n{\n    \"data\": \"2020-09-10T15:24:39.304Z\",\n    \"alunos\": [\n       \"5f59201f7365d61fb65e6ca6\",\n    ],\n    \"turma\": \"5f5ff0f61103bd1257d0d712\"\n}\n\n\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/Frequencia",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"Frequencia"
+					]
+				},
+				"description": "Inserir"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

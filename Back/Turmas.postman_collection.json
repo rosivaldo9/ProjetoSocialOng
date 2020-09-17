@@ -1,0 +1,81 @@
+{
+	"info": {
+		"_postman_id": "c0180ba6-bd07-4136-93dc-1ded1d2a7b46",
+		"name": "Turmas",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3003/sistema/Turma",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"nome\": \"A\",\n    \"alunos\": [\n        \"5f59201f7365d61fb65e6ca6\"\n    ]\n},\n\n{\n    \"nome\": \"B\",\n    \"alunos\": [\n        \"5f59201f7365d61fb65e6ca6\"\n    ]\n}\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/Turma",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"Turma"
+					]
+				},
+				"description": "Listar turmas"
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3003/sistema/CadastroPublico?page=1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nome\": \"C\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/CadastroPublico?page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"CadastroPublico"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
