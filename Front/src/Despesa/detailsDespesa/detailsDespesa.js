@@ -14,9 +14,6 @@ export default class DetailsDespesa extends Component {
             data: Date,
             valor: 0
         }
-
-
-
     }
 
     async componentDidMount() {                               //metodo executa no momento da execução da aplicação
@@ -83,9 +80,6 @@ export default class DetailsDespesa extends Component {
                     </div>
                   
                     </div>
-
-
-            
             </fieldset>
         </form>
        );

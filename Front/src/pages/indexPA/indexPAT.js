@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import './index.css'
 import Tabela from './tabela'
 
-
-
 export default class indexPA extends Component {
 
     state = {
@@ -27,10 +25,10 @@ export default class indexPA extends Component {
         const { publicoAtendido, publicoAtendidoInfo, page } = this.state; // definir variaveis em seu estado atual, carregadas com a lista
         return (
 
-          <div>
-              <h4>Lista dos Publico Atendido</h4>
-              <Tabela row={filtro(this.state.publicoAtendido)}/>
-          </div>
+            <div>
+                <h4>Lista dos Publico Atendido</h4>
+                <Tabela row={filtro(this.state.publicoAtendido)} />
+            </div>
 
         );
     }
@@ -39,17 +37,11 @@ export default class indexPA extends Component {
 
 function filtro(props) {
 
-
-
     var t = []
-      for(var i =0; i<props.length; i++){
-       t.push(props[i]);
-       t[i]["detalhes"]= <Link to={`/detalhes/${props[i]["_id"]}`}>Detalhes</Link>
-   
-   }
-   
-   
-      
-      return t;
-   }
-   
+    for (var i = 0; i < props.length; i++) {
+        t.push(props[i]);
+        t[i]["detalhes"] = <Link to={`/detalhes/${props[i]["_id"]}`}>Detalhes</Link>
+
+    }
+    return t;
+}

@@ -2,12 +2,25 @@ const mongoose = require('mongoose');
 const PublicoAtendido = mongoose.model('PublicoAtendido');
 
 
-
 module.exports = {
     //metodo salvar
     async insert(req, res) {
-        const publicoAtendido = await PublicoAtendido.create(req.body);
-        return res.json(publicoAtendido);
+        let pa = JSON.parse(req.body.publicoAtendido)
+        
+        console.log(req.files['arquivoFoto'])
+        if(req.files['arquivoFoto']){
+            let fotoSalva = req.files['arquivoFoto'][0]
+            pa.foto = fotoSalva.path
+        }  
+        
+       // console.log("CPC Request file ---\n", fotoSalva)//Here you get file.
+        //console.log("CPC Publico A. ---\n", pa)//Here you get file.
+
+         const publicoAtendido = await PublicoAtendido.create(pa);
+         return res.json(publicoAtendido);
+       
+        
+        //return res.json(req.body.publicoAtendido)
     },
     //metodo listar
     async index(req, res) {

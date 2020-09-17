@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pie} from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import axios from 'axios';
 
 /*
@@ -50,22 +50,22 @@ export default class App extends React.Component {
   }
 
 
- componentDidMount() { // metodo executa automatico quando inicia a aplicação
-     this.loadPadrinho();
- }
+  componentDidMount() { // metodo executa automatico quando inicia a aplicação
+    this.loadPadrinho();
+  }
 
- loadPadrinho = async () => {
-     const response = await axios.get('http://localhost:3003/sistema/ListaPublicoMasculino'); //buscar dos dados no banco
-     this.setState({Padrinho: response.data }); // setando o estado de Pu.At. com informações da lista do banco 
-    
-    }
+  loadPadrinho = async () => {
+    const response = await axios.get('http://localhost:3003/sistema/ListaPublicoMasculino'); //buscar dos dados no banco
+    this.setState({ Padrinho: response.data }); // setando o estado de Pu.At. com informações da lista do banco 
+
+  }
 
   render() {
-    const {Padrinho,PadrinhoInfo} = this.state;
+    const { Padrinho, PadrinhoInfo } = this.state;
 
-  const b = this.state.Padrinho.length;
+    const b = this.state.Padrinho.length;
 
-console.log(this.state.Padrinho.length)
+    console.log(this.state.Padrinho.length)
 
     const stat = {
       labels: ['Masculino', 'Femenino'],
@@ -77,28 +77,28 @@ console.log(this.state.Padrinho.length)
             '#C9DE00'
           ],
           hoverBackgroundColor: [
-          '#501800',
-          '#4B5000'
+            '#501800',
+            '#4B5000'
           ],
-          data: [ b, b]
+          data: [b, b]
         }
       ]
     }
 
     return (
-      
+
       <div>
         <Pie
           data={stat}
           options={{
-            title:{
-              display:true,
-              text:'Average Rainfall per month',
-              fontSize:20
+            title: {
+              display: true,
+              text: 'Average Rainfall per month',
+              fontSize: 20
             },
-            legend:{
-              display:true,
-              position:'right'
+            legend: {
+              display: true,
+              position: 'right'
             }
           }}
         />

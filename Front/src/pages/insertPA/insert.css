@@ -35,3 +35,17 @@ h3 {
 .tituloForm{
     margin-top: 30px;
 }
+
+input[type='file'] {
+    display: none
+  }
+  
+  /* Aparência que terá o seletor de arquivo */
+  #foto-upload-label {
+    background-color: #3498db;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    margin: 10px;
+    padding: 6px 20px
+  }

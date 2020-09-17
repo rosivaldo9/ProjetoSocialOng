@@ -3,12 +3,17 @@ const mongoose = require("mongoose");
 const requireDir = require("require-dir");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const path = require('path')
 
 const app = express();//gerenciador de rotas
 app.use(express.json());//gerenciando rotas em formato Json
 app.use(bodyParser.urlencoded({extended: true}));//configurado para analisar dados no formato json da url
 app.use(bodyParser.json())//configurado para analisar dados no formato json
 app.use(cors());
+
+app.use('/src/uploads', express.static(path.join(__dirname, 'src/uploads')))
+app.use('/assets', express.static(path.join(__dirname, 'src/assets')))
+
 
 
     //conexão com banco de dados

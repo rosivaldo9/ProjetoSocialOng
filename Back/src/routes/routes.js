@@ -13,6 +13,47 @@ const Despesa = require('../controllers/DespesasController');
 const User = require('../controllers/UserController');
 const rela = require('../relatorio/rela')
 const Receita = require('../controllers/ReceitaController')
+const Turma = require('../controllers/TurmaController')
+const Frequencia = require('../controllers/FrequenciaController')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './src/uploads/')
+    },
+    filename: function name(req, file, cb) {
+        cb(null, Date.now() + file.originalname)
+    }
+})
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+        cb(null, true)
+    }else{
+        cb(null, false)
+    }
+}
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+}).fields([{name: 'arquivoFoto', maxCount: 1}, {name: 'publicoAtendido', maxCount: 1}])
+
+// function uploader(req, res) {
+//     upload(req, res, function (err) {
+//        // console.log("REQUEST --- \n", req.body.arquivoFoto)
+//        //let PA = JSON.parse(req.body.publicoAtendido)
+//        // console.log("PUBLICO ATENDIDO ---", PA.foto)
+//         console.log("Request file ---", req.file.path)//Here you get file.
+//         /*Now do where ever you want to do*/
+//         if(!err) {
+//             return res.send(200).end()
+//         }
+//     })
+// }
 
 
 
@@ -24,7 +65,12 @@ routes.put('/usuarios/:id', usuarioController.atualizar)
 routes.delete('/usuarios/:id', usuarioController.delete);*/
 
 //Rotas publico Atendido
-routes.post('/CadastroPublico', CadastroPublico.insert);//salvar
+routes.post('/CadastroPublico', upload, (req, res, next)=>{
+   // console.log("Request files ---\n", req.files['arquivoFoto'][0])//Here you get file.
+   // console.log("PA ---", req.body.publicoAtendido)//Here you get file.
+    CadastroPublico.insert(req, res)
+
+});//salvar
 routes.get('/CadastroPublico', CadastroPublico.index);//lista
 routes.get('/CadastroPublico/:id', CadastroPublico.detalhes);//detalhes
 routes.put('/CadastroPublico/:id', CadastroPublico.atualizar);//atualizar
@@ -93,6 +139,21 @@ routes.get('/Receita', Receita.index);//lista
 routes.get('/Receita/:id', Receita.detalhes);//detalhes
 routes.put('/Receita/:id', Receita.atualizar);//atualizar
 routes.delete('/Receita/:id', Receita.delete);//deletar 
+
+//Rotas Turma
+routes.post('/Turma', Turma.insert);//salvar
+routes.get('/Turma', Turma.index);//lista
+routes.get('/Turma/:id', Turma.detalhes);//detalhes
+routes.put('/Turma/:id', Turma.atualizar);//atualizar
+routes.delete('/Turma/:id', Turma.delete);//deletar 
+
+
+//Rotas Frequencia
+routes.post('/Frequencia', Frequencia.insert);//salvar
+routes.get('/Frequencia', Frequencia.index);//lista
+routes.get('/Frequencia/:id', Frequencia.detalhes);//detalhes
+routes.put('/Frequencia/:id', Frequencia.atualizar);//atualizar
+routes.delete('/Frequencia/:id', Frequencia.delete);//deletar 
 
 routes.post('/user', User.insert);//salvar
 routes.post('/userLogin', User.login);//lista

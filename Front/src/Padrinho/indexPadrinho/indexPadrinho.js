@@ -27,7 +27,7 @@ export default class indexPadrinho extends Component {
         if (page === 1) return;
 
         const pageNumber = page - 1;
-        this.loadVoPadrinho(pageNumber);
+        this.loadPadrinho(pageNumber);
     }
     nexPage = () => {
         const { page,PadrinhoInfo } = this.state;
@@ -60,8 +60,7 @@ export default class indexPadrinho extends Component {
                                     <td>Deletar</td>
                                     </tr>
                             ))}
-
-                        
+           
                     </tbody>
                 </table>
 

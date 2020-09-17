@@ -16,8 +16,6 @@ export default class index extends Component {
 
       <div>
         <Router>
-
-
           <header>
             <Header />
           </header>

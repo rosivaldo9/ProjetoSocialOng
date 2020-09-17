@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
-import api from '../../service/service';
+import {api, STATIC_SERVER_ADDRESS} from '../../service/service';
 import { Link } from "react-router-dom";
 import '../indexPA/index.css';
 import './detail.css'
-
-
 
 
 export default class PublicoPA extends Component {
     state = {
         publicoAtendido: {
             nome: "",
+            foto: "",
             dataNascimento: Date,
             sexo: "",
             raca: "",
@@ -59,6 +58,12 @@ export default class PublicoPA extends Component {
     <div className="card textForm">
         <h3 align="center">Dados Pessoais</h3>
         <div className="card-body">
+            <div className="form-row">
+                <img src={STATIC_SERVER_ADDRESS + this.state.publicoAtendido.foto}
+                width="150"
+                height="170"
+                />
+            </div>
             <div className="form-row">
                 <div className="form-group col-sm-5">
                 <label htmlFor="nome">Nome</label>
