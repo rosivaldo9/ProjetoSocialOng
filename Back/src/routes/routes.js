@@ -15,32 +15,19 @@ const rela = require('../relatorio/rela')
 const Receita = require('../controllers/ReceitaController')
 const Turma = require('../controllers/TurmaController')
 const Frequencia = require('../controllers/FrequenciaController')
-const multer = require('multer')
-
-const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-        cb(null, './src/uploads/')
-    },
-    filename: function name(req, file, cb) {
-        cb(null, Date.now() + file.originalname)
-    }
-})
-
-const fileFilter = (req, file, cb) => {
-    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
-        cb(null, true)
-    }else{
-        cb(null, false)
-    }
-}
-
-const upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 1024 * 1024 * 5
-    },
-    fileFilter: fileFilter
-}).fields([{name: 'arquivoFoto', maxCount: 1}, {name: 'publicoAtendido', maxCount: 1}])
+const createUpload = require('../util/multer-upload')
+const uploadPublicoAtendito = 
+        createUpload(
+            path = './src/uploads/publico_atendido/',
+            fileField = 'arquivoFoto',
+            JSONField = 'publicoAtendido'
+        )
+const uploadServidor = 
+        createUpload(
+            path = './src/uploads/servidor/',
+            fileField = 'arquivoFoto',
+            JSONField = 'servidor'
+        )
 
 // function uploader(req, res) {
 //     upload(req, res, function (err) {
@@ -65,15 +52,10 @@ routes.put('/usuarios/:id', usuarioController.atualizar)
 routes.delete('/usuarios/:id', usuarioController.delete);*/
 
 //Rotas publico Atendido
-routes.post('/CadastroPublico', upload, (req, res, next)=>{
-   // console.log("Request files ---\n", req.files['arquivoFoto'][0])//Here you get file.
-   // console.log("PA ---", req.body.publicoAtendido)//Here you get file.
-    CadastroPublico.insert(req, res)
-
-});//salvar
+routes.post('/CadastroPublico', uploadPublicoAtendito, CadastroPublico.insert);//salvar
 routes.get('/CadastroPublico', CadastroPublico.index);//lista
 routes.get('/CadastroPublico/:id', CadastroPublico.detalhes);//detalhes
-routes.put('/CadastroPublico/:id', CadastroPublico.atualizar);//atualizar
+routes.put('/CadastroPublico/:id', uploadPublicoAtendito, CadastroPublico.atualizar);//atualizar
 routes.delete('/CadastroPublico/:id', CadastroPublico.delete);//deletar
 routes.get('/ListaPublicoFemeninoTotal', CadastroPublico.indexSexoFemeninoTotal);//deletar
 routes.get('/ListaPublicoMasculinototal', CadastroPublico.indexSexoMasculinoTotal);//deletar
@@ -104,10 +86,10 @@ routes.get('/ListaCorPreta', CadastroPublico.indexCorPreta);//deletar
 
 
 //Rotas Servidores
-routes.post('/Servidor', Servidor.insert);//salvar
+routes.post('/Servidor', uploadServidor, Servidor.insert);//salvar
 routes.get('/Servidor', Servidor.index);//lista
 routes.get('/Servidor/:id', Servidor.detalhes);//detalhes
-routes.put('/Servidor/:id', Servidor.atualizar);//atualizar
+routes.put('/Servidor/:id',uploadServidor, Servidor.atualizar);//atualizar
 routes.delete('/Servidor/:id', Servidor.delete);//deletar
 
 //Rotas Voluntario

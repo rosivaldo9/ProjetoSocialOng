@@ -16,7 +16,7 @@ const PublicoAtendido = new mongoose.Schema({
                 default: "assets/perfil.png"
             },
             dataNascimento:{
-                type: Date,
+                type: String,
                 
             },
             sexo:{

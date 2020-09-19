@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import './insert.css';
+import {STATIC_SERVER_ADDRESS} from '../../service/service'
 
 class CriaServidor extends Component {
     constructor() {
@@ -26,15 +27,17 @@ class CriaServidor extends Component {
                 mae: "",
                 estadoCivil: "",
                 grauInstrucao: "",
+                cursoHabilitacao: "",
                 funcao: "",
                 rua: "",
                 numero: "",
                 bairro: "",
                 celular: "",
                 email: ""
-
             },
             redirect: false,
+            arquivoFoto: {},
+            fotoPreview: STATIC_SERVER_ADDRESS + 'assets/perfil.png'
         }
     }
     render() {
@@ -49,6 +52,13 @@ class CriaServidor extends Component {
                         <div className="card textForm">
                             <h3 align="center">Dados Pessoais</h3>
                             <div className="card-body">
+                            <div className="container col-md-4 col-sm-4 float-right">
+                                <img className="d-flex justify-content-center mx-auto" id="img" src={this.state.fotoPreview} width="170" height="250" />
+                                <label className="d-flex justify-content-center mx-auto" id="foto-upload-label" for="foto-upload">
+                                    Selecione um arquivo
+                                        </label>
+                                <input id="foto-upload" type="file" onChange={this.handleImageChange} />
+                            </div>
                                 <div className="form-row">
                                     <div className="form-group col-sm-5">
                                         <label htmlFor="nome">Nome</label>
@@ -162,7 +172,7 @@ class CriaServidor extends Component {
                                         <label htmlFor="titulo">Título</label>
                                         <input
                                             className="form-control config-input"
-                                            type="text"
+                                            type="number"
                                             id="titulo"
                                             name="titulo"
                                             minLength="12"
@@ -188,7 +198,7 @@ class CriaServidor extends Component {
                                         <label htmlFor="secao">Seção</label>
                                         <input
                                             className="form-control config-input"
-                                            type="text"
+                                            type="number"
                                             id="secao"
                                             name="secao"
                                             minLength="4"
@@ -244,7 +254,7 @@ class CriaServidor extends Component {
                                         <label htmlFor="mae">Mãe</label>
                                         <input
                                             className="form-control config-input"
-                                            type="Number"
+                                            type="text"
                                             id="mae"
                                             name="mae"
                                             required
@@ -295,7 +305,7 @@ class CriaServidor extends Component {
                                         <label htmlFor="cursoHabilitacao">Curso Habilitacão</label>
                                         <input
                                             className="form-control config-input"
-                                            type="Number"
+                                            type="text"
                                             id="cursoHabilitacao"
                                             name="cursoHabilitacao"
                                             required
@@ -377,22 +387,29 @@ class CriaServidor extends Component {
                                     </div>
                                 </div>
 
-
-
-
-
                                 <button type="submit" className="btn btn-primary btn-lg float-right">Cadastrar</button>
                             </div>
 
                         </div>
-
-
-
                     </fieldset>
                 </form>
             )
         }
     }
+
+    handleImageChange = event => {
+        const target = event.target;
+
+        let file = target.files[0]
+        let fotoUrl = URL.createObjectURL(file)
+
+        this.setState({
+            fotoPreview: fotoUrl,
+            arquivoFoto: file
+        });
+
+        // console.log("URL DE FOTO TEMPORARIA " + fotoUrl)
+    };
 
     // Metodo para atualizar o estado do campo
     handleInputChange = event => {
@@ -408,19 +425,23 @@ class CriaServidor extends Component {
 
     //metodo para salvar os dados
     handleSubmit = event => {
+        event.preventDefault();
+        let formDataObj = new FormData();
+
+        let JSONServidor = JSON.stringify(this.state.Servidor)
+
+        formDataObj.append('servidor', JSONServidor)
+        formDataObj.append('arquivoFoto', this.state.arquivoFoto)
+
+
         fetch("http://localhost:3003/sistema/Servidor", {
             method: "post",
-            body: JSON.stringify(this.state.Servidor),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(data => {     //vereficar os dados
+            body: formDataObj,
+        }).then(data => {     //vereficar os dados
                 if (data.ok) {
                     this.setState({ redirect: true });
                 }
             })
-        event.preventDefault();
     }
 }
 

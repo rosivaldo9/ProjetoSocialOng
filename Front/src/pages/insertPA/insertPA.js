@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import './insert.css';
-import imagemDePerfil from '../../image/perfil.png'
-import {STATIC_SERVER_ADDRESS} from '../../service/service' 
+import { STATIC_SERVER_ADDRESS } from '../../service/service'
 
 class CriaPA extends Component {
     constructor() {
@@ -41,7 +40,7 @@ class CriaPA extends Component {
             },
             redirect: false,
             arquivoFoto: {},
-            fotoPreview: STATIC_SERVER_ADDRESS + 'assets/perfil.png' 
+            fotoPreview: STATIC_SERVER_ADDRESS + 'assets/perfil.png'
         }
 
     }
@@ -61,16 +60,16 @@ class CriaPA extends Component {
                         <legend align="center">Cadastro de Público Atendido</legend>
                         <div className="card textForm">
                             <h3 align="center">Dados Pessoais</h3>
+                           
                             <div className="card-body">
-                                <div className="form-row">
-                                    <div className="form-group">
-                                        <label id="foto-upload-label" for="foto-upload">
-                                           Selecione um arquivo
+                            <div className="container col-md-4 col-sm-4 float-right">
+                                <img className="d-flex justify-content-center mx-auto" id="img" src={this.state.fotoPreview} width="170" height="250" />
+                                <label className="d-flex justify-content-center mx-auto" id="foto-upload-label" for="foto-upload">
+                                    Selecione um arquivo
                                         </label>
-                                        <input id="foto-upload" type="file" onChange= {this.handleImageChange}/>
-                                        <img id="img" src={this.state.fotoPreview} width="150" height="170"/>
-                                    </div>
-                                </div>
+                                <input id="foto-upload" type="file" onChange={this.handleImageChange} />
+                            </div>
+
                                 <div className="form-row">
                                     <div className="form-group col-sm-5">
                                         <label htmlFor="nome">Nome</label>
@@ -447,7 +446,7 @@ class CriaPA extends Component {
             arquivoFoto: file
         });
 
-       // console.log("URL DE FOTO TEMPORARIA " + fotoUrl)
+        // console.log("URL DE FOTO TEMPORARIA " + fotoUrl)
     };
 
     // Metodo para atualizar o estado do campo
@@ -466,7 +465,7 @@ class CriaPA extends Component {
     handleSubmit = event => {
         event.preventDefault();
 
-console.log("ARQUIVO " + this.state.arquivoFoto)
+        console.log("ARQUIVO " + this.state.arquivoFoto)
 
         let formDataObj = new FormData();
 

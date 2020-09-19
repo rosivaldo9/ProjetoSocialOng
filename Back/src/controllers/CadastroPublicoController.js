@@ -1,26 +1,17 @@
 const mongoose = require('mongoose');
 const PublicoAtendido = mongoose.model('PublicoAtendido');
-
+const deleteFile = require('../util/fileutils')
 
 module.exports = {
     //metodo salvar
     async insert(req, res) {
-        let pa = JSON.parse(req.body.publicoAtendido)
-        
-        console.log(req.files['arquivoFoto'])
-        if(req.files['arquivoFoto']){
+        let newPublicoAtendido = JSON.parse(req.body.publicoAtendido)
+        if (req.files['arquivoFoto']) {
             let fotoSalva = req.files['arquivoFoto'][0]
-            pa.foto = fotoSalva.path
-        }  
-        
-       // console.log("CPC Request file ---\n", fotoSalva)//Here you get file.
-        //console.log("CPC Publico A. ---\n", pa)//Here you get file.
-
-         const publicoAtendido = await PublicoAtendido.create(pa);
-         return res.json(publicoAtendido);
-       
-        
-        //return res.json(req.body.publicoAtendido)
+            newPublicoAtendido.foto = fotoSalva.path
+        }
+        const publicoAtendido = await PublicoAtendido.create(newPublicoAtendido);
+        return res.json(publicoAtendido);
     },
     //metodo listar
     async index(req, res) {
@@ -35,12 +26,27 @@ module.exports = {
     },
     //metodo atualizar
     async atualizar(req, res) {
-        const publicoAtendido = await PublicoAtendido.findByIdAndUpdate(req.params.id, req.body, { new: true });
+        let modifiedServidor = JSON.parse(req.body.publicoAtendido)
+       
+        if (req.files['arquivoFoto']) {
+             //deleta foto anterior se existir
+            deleteFile(modifiedServidor.foto)
+            let fotoSalva = req.files['arquivoFoto'][0]
+            modifiedServidor.foto = fotoSalva.path
+        }
+        const publicoAtendido = await PublicoAtendido.findByIdAndUpdate(req.params.id, modifiedServidor, { new: true });
         return res.json(publicoAtendido);
     },
     //metodo deletar
     async delete(req, res) {
-        await PublicoAtendido.findByIdAndRemove(req.params.id);
+        const publicoAtendido = await PublicoAtendido.findById(req.params.id);
+        try {
+            deleteFile(publicoAtendido.foto)
+        } catch (error) {
+            console.log(error)
+        }
+        await PublicoAtendido.deleteOne(publicoAtendido)
+
         return res.send();
     },
 
