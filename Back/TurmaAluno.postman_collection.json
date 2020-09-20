@@ -1,0 +1,126 @@
+{
+	"info": {
+		"_postman_id": "1e1d94b9-80e7-4af5-aef2-e016f57de2fd",
+		"name": "TurmaAluno",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "TA/Listar",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/TurmaAluno?aluno=5f6641676fd8df3601c54bf3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"TurmaAluno"
+					],
+					"query": [
+						{
+							"key": "turma",
+							"value": "5f676236d3d68b12c908f911",
+							"disabled": true
+						},
+						{
+							"key": "aluno",
+							"value": "5f6641676fd8df3601c54bf3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TA/Salvar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n    {\n        \"turma\": \"5f676236d3d68b12c908f911\",\n        \"aluno\": \"5f662f76b4d8262b0ffe0dc6\"\n    },\n    {\n        \"turma\": \"5f676236d3d68b12c908f911\",\n        \"aluno\": \"5f6641457e817a35af08f400\"\n    },\n    {\n        \"turma\": \"5f676236d3d68b12c908f911\",\n        \"aluno\": \"5f6641676fd8df3601c54bf3\"\n    }\n]",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/TurmaAluno",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"TurmaAluno"
+					]
+				},
+				"description": "Salvar"
+			},
+			"response": []
+		},
+		{
+			"name": "TA/Query",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3003/sistema/TurmaAluno?aluno=5f6641676fd8df3601c54bf3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3003",
+					"path": [
+						"sistema",
+						"TurmaAluno"
+					],
+					"query": [
+						{
+							"key": "turma",
+							"value": "5f676236d3d68b12c908f911",
+							"disabled": true
+						},
+						{
+							"key": "aluno",
+							"value": "5f6641676fd8df3601c54bf3"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

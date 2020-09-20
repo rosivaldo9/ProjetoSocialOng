@@ -3,31 +3,34 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema
 const mongoPaginate = require("mongoose-paginate");
-const PublicoAtendido = require("./PublicoAtendido")
 
-//documento do banco
 const Frequencia = new mongoose.Schema({
 
     data: {
-        type: Date,
+        type: String,
         required: true,
-        default: Date.now()
+        default: new Date().toLocaleString()
     },
     turma: {
         type: Schema.Types.ObjectId,
         ref: "Turma",
-        required: true
+        required: true,
+        autopopulate: true
     },
-
-    //Alunos presentes
-    alunos: [{
+    aluno: {
         type: Schema.Types.ObjectId,
-        ref: "PublicoAtendido"
-    }]
+        ref: "PublicoAtendido",
+        required: true,
+        //autopopulate: true
+    },
+    presente: {
+        type: Boolean,
+        default: false
+    }
 
 });
 
 //paginando lista
 Frequencia.plugin(mongoPaginate);
-
+//Frequencia.plugin(require('mongoose-autopopulate'));
 mongoose.model('Frequencia', Frequencia);

@@ -10,16 +10,10 @@ const Turma = new mongoose.Schema({
                 type: String,
                 required: true
             },
-            alunos: [{
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "PublicoAtendido",
-                autopopulate: true
-            }]
+            
 
 });
 
 //paginando lista
 Turma.plugin(mongoPaginate);
-Turma.plugin(require('mongoose-autopopulate'));
-
 mongoose.model('Turma', Turma);

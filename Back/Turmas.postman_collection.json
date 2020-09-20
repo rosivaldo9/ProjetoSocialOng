@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"name": "localhost:3003/sistema/Turma",
+			"name": "T/Listar",
 			"protocolProfileBehavior": {
 				"disableBodyPruning": true
 			},
@@ -39,16 +39,13 @@
 			"response": []
 		},
 		{
-			"name": "localhost:3003/sistema/CadastroPublico?page=1",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "T/Salvar",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nome\": \"C\"\n}",
+					"raw": "[{\n    \"nome\": \"A\"\n},\n\n{\n    \"nome\": \"B\"\n}\n]",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,7 +53,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3003/sistema/CadastroPublico?page=1",
+					"raw": "http://localhost:3003/sistema/Turma",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -64,15 +61,10 @@
 					"port": "3003",
 					"path": [
 						"sistema",
-						"CadastroPublico"
-					],
-					"query": [
-						{
-							"key": "page",
-							"value": "1"
-						}
+						"Turma"
 					]
-				}
+				},
+				"description": "Salvar"
 			},
 			"response": []
 		}

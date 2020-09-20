@@ -15,6 +15,8 @@ const rela = require('../relatorio/rela')
 const Receita = require('../controllers/ReceitaController')
 const Turma = require('../controllers/TurmaController')
 const Frequencia = require('../controllers/FrequenciaController')
+const TurmaAluno = require('../controllers/TurmaAlunoController')
+
 const createUpload = require('../util/multer-upload')
 const uploadPublicoAtendito = 
         createUpload(
@@ -129,6 +131,12 @@ routes.get('/Turma/:id', Turma.detalhes);//detalhes
 routes.put('/Turma/:id', Turma.atualizar);//atualizar
 routes.delete('/Turma/:id', Turma.delete);//deletar 
 
+//Rotas AlunoTurma
+routes.post('/TurmaAluno', TurmaAluno.insert);//salvar
+routes.get('/TurmaAluno', TurmaAluno.index);//lista
+routes.get('/TurmaAluno/:id', TurmaAluno.detalhes);//detalhes
+routes.put('/TurmaAluno/:id', TurmaAluno.atualizar);//atualizar
+routes.delete('/TurmaAluno/:id', TurmaAluno.delete);//deletar 
 
 //Rotas Frequencia
 routes.post('/Frequencia', Frequencia.insert);//salvar

@@ -4,19 +4,29 @@ const Frequencia = mongoose.model('Frequencia');
 module.exports={
     //metodo salvar
     async insert (req, res){
+        console.log("CREATE")
         const frequencia = await Frequencia.create(req.body);
         return res.json(frequencia);
     },
     //metodo listar nome da turma e nome dos alunos presentes
     async index(req, res){
         const {page} = req.query;
-        const frequencia = await Frequencia.paginate({}, {populate: ['turma', 'alunos'], page, limit: 500})
+        console.log("PARAMS \n", req.query)
+        const frequencia = await Frequencia.paginate(
+            req.query, 
+            {
+                populate: [
+                    {path: 'aluno', select: '_id nome'},
+                    {path: 'turma', select: '_id nome'}
+                ],
+                page, limit: 500
+            })
        
         return res.json(frequencia);
     },
     //metodo de detalhes
     async detalhes(req, res){
-        const frequencia = await Frequencia.findById(req.params.id).populate(['turma', 'alunos']);
+        const frequencia = await Frequencia.findById(req.params.id)
         return res.json(frequencia);
     },
     //metodo de Atualizar
