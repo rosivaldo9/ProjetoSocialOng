@@ -28,7 +28,7 @@ class CriaPA extends Component {
                 bairro: "",
                 moraComQuem: "",
                 nomeResponsavel: "",
-                cpfResponsavel: 0,
+                cpfResponsavel: 0, // TODO
                 nis: 0,
                 funcao: "",
                 escolaridade: "",

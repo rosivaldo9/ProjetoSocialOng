@@ -16,11 +16,13 @@ class Profile extends Component {
 
   componentDidMount() {
     const token = localStorage.usertoken
-    const decoded = jwt_decode(token)
-    this.setState({
-      nome: decoded.nome,
-      email: decoded.email
-    })
+    if (token) {
+      const decoded = jwt_decode(token)
+      this.setState({
+        nome: decoded.nome,
+        email: decoded.email
+      })
+    }
   }
 
   render() {

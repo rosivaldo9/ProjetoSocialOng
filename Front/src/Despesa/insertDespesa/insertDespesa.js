@@ -14,14 +14,14 @@ class CriarDespesa extends Component {
             Despesa: {
                 despesa: "",
                 descricao: "",
-                valor: Number,
-                data: Date
-
+                valor: 0,
+                data: new Date()
             },
             redirect: false,
         }
     }
     render() {
+     
         const { redirect } = this.state;
         if (redirect) {
             return (
@@ -87,14 +87,15 @@ class CriarDespesa extends Component {
                                             value={this.state.Despesa.descricao}
                                             onChange={this.handleInputChange} />
                                     </div>
+                                    
                                     <div className="form-group col-sm-3">
                                         <label htmlFor="data">data:</label>
                                         <input
                                             className="form-control config-input"
-                                            type="Date"
+                                            type="date"
                                             id="data"
-
-                                            value={this.state.Despesa.data = new Date()}
+                                            name="data"
+                                            defaultValue={new Date().toISOString().substring(0,10)}
                                             onChange={this.handleInputChange} />
                                     </div>
 

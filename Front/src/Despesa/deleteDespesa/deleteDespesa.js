@@ -22,15 +22,15 @@ class DeleteDespesa extends Component{
     render() {
         const { redirect } = this.state;
         if (redirect) {
-            return <Redirect />
+            return <Redirect to="/profile"/>
         } else {
             return (
                 <fieldset>
                     <legend>Deletar usuario</legend>
                     <div>
                         <label htmlFor="nome">Nome</label>
-                        <h5>{this.state.Despesa.nome}</h5>
-                        <p>Tem certeza que deja deletar esse usuario?</p>
+                        <h5>{this.state.Despesa.despesa}</h5>
+                        <p>Tem certeza que deja deletar essa Despesa?</p>
                         <button onClick={this.handleClick}>Remover</button>
                     </div>
                     <br /><br />
@@ -44,7 +44,7 @@ class DeleteDespesa extends Component{
 
     handleClick = event => {
         const { id } = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/Padrinho/${id}`, {
+        fetch(`http://localhost:3003/sistema/Despesa/${id}`, {
             method: "delete"
         })
             .then(data => {

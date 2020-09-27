@@ -3,6 +3,7 @@ import { api, STATIC_SERVER_ADDRESS } from '../../service/service';
 import { Link } from "react-router-dom";
 import '../indexPA/index.css';
 import './detail.css'
+import {setPdfData,printPdf} from './templatePdf'
 
 
 export default class PublicoPA extends Component {
@@ -10,7 +11,7 @@ export default class PublicoPA extends Component {
         publicoAtendido: {
             nome: "",
             foto: "",
-            dataNascimento: Date,
+            dataNascimento: "",
             sexo: "",
             raca: "",
             altura: 0,
@@ -44,12 +45,16 @@ export default class PublicoPA extends Component {
         const { id } = this.props.match.params;                     // pegando o ID da url através do props
         const response = await api.get(`/CadastroPublico/${id}`);  // busca da lista no banco de dados
         this.setState({ publicoAtendido: response.data });         //setando dados do publicoAtendido com dados da lista
+        setPdfData(response.data)
+    }
+
+    handleClick(){
+        printPdf()
     }
 
     render() {
         const { publicoAtendido } = this.state;  // PublicoAtendido no seu estado atual
-
-
+    
         return (
 
             <form className="tituloDetails" onSubmit={this.handleSubmit}>
@@ -60,7 +65,7 @@ export default class PublicoPA extends Component {
                         <div className="card-body">
                             <div className="container col-md-4 col-sm-4 float-right">
                                 <img className="d-flex justify-content-center mx-auto" 
-                                id="img" src={STATIC_SERVER_ADDRESS + this.state.publicoAtendido.foto}
+                                id="img" src={STATIC_SERVER_ADDRESS + publicoAtendido.foto}
                                  width="170" height="250" />
                                 
                             </div>
@@ -74,10 +79,13 @@ export default class PublicoPA extends Component {
                                 </div>
                                 <div className="form-group col-sm-4">
                                     <label htmlFor="dataNascimento">Data Nascimento:</label>
+                                   
                                     <input
+                                        type="date"
                                         className="form-control config-input"
                                         disabled="true"
-                                        value={publicoAtendido.dataNascimento} />
+                                        value={publicoAtendido.dataNascimento.substring(0,10)}
+                                         />
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label htmlFor="sexo">Sexo:</label>
@@ -271,6 +279,7 @@ export default class PublicoPA extends Component {
 
 
                             </div>
+                            <button type="button" className="btn btn-info btn-lg" onClick={this.handleClick}>Imprimir</button>
                             <Link to={`/page5/${publicoAtendido._id}`}><button type="button" className="btn btn-warning btn-lg">Editar</button></Link>
                             <Link to={`/page6/${publicoAtendido._id}`}><button type="button" className="btn btn-danger btn-lg">Deletar</button></Link>
                         </div>

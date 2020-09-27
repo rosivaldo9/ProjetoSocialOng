@@ -11,7 +11,7 @@ export default class DetailsServidor extends Component {
         Servidor: {
             nome: "",
             foto: "",
-            dataNascimento: Date,
+            dataNascimento: "",
             sexo: "",
             raca: "",
             titulo: 0,
@@ -77,7 +77,7 @@ export default class DetailsServidor extends Component {
                                         type="date"
                                         className="form-control config-input"
                                         disabled="true"
-                                        value={Servidor.dataNascimento} />
+                                        value={Servidor.dataNascimento.substring(0,10)} />
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label htmlFor="sexo">Sexo:</label>

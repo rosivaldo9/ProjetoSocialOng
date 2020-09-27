@@ -5,6 +5,7 @@ import Lista from '../Despesa/indexDespesa/indexDespesaTest';
 import Detalhes from '../Despesa/detailsDespesa/detailsDespesa';
 import Editar from '../Despesa/updatDespesa/updatDespesa';
 import Deletar from '../Despesa/deleteDespesa/deleteDespesa';
+import Relatorio from "../Despesa/relatorioDespesa";
 
 
 
@@ -26,6 +27,7 @@ export default class index extends Component {
               <Route path="/page28/:id" component={Detalhes} />
               <Route path="/page29/:id" component={Editar} />
               <Route path="/page30/:id" component={Deletar} />
+              <Route path="/page20" component={Relatorio}/>
             </Switch>
           </section>
         </Router>

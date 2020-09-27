@@ -16,7 +16,7 @@ const PublicoAtendido = new mongoose.Schema({
                 default: "assets/perfil.png"
             },
             dataNascimento:{
-                type: String,
+                type: Date,
                 
             },
             sexo:{
@@ -88,9 +88,7 @@ const PublicoAtendido = new mongoose.Schema({
               
             },
             cpfResponsavel:{
-                type:Number,
-               
-            
+                type:Number,            
             },
             nis:{
                 type: Number,

@@ -15,7 +15,7 @@ const ServidorSchema = new mongoose.Schema({
                 default: "assets/perfil.png"
             },
             dataNascimento:{
-                type: String,
+                type: Date,
                 
             },
             sexo:{
