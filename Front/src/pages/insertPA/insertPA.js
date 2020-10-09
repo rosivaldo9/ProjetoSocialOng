@@ -50,7 +50,7 @@ class CriaPA extends Component {
         if (redirect) {
             return <Redirect to="/" />,
                 <div className="alert alert-success aler" role="alert">
-                    <p>Os dados foram salvo com sucesso</p>
+                    <p>Os dados foram salvos com sucesso</p>
                 </div>
         } else {
             return (

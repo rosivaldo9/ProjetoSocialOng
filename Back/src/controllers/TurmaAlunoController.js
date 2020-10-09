@@ -4,7 +4,7 @@ const TurmaAluno = mongoose.model('TurmaAluno');
 module.exports={
     //metodo salvar
     async insert (req, res){
-        const turmaaluno = await TurmaAluno.create(req.body);
+        const turmaaluno = await TurmaAluno.insertMany(req.body);
         return res.json(turmaaluno);
     },
     //metodo listar nome da turma e nome dos alunos presentes
