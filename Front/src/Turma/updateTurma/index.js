@@ -11,17 +11,16 @@ class UpdateTurma extends Component {
         nome: ''
       },
       PublicoAtendido: [],
-      AlunosDaTurma: [],
+      AlunosDaTurma: {},
       saveFeedBack: null,
     }
   }
   render() {
     const { saveFeedBack, PublicoAtendido, AlunosDaTurma, Turma } = this.state;
-
     return (
       <div className='container'>
         <div className="col-12">
-          <h1>Adicionar alunos à turma</h1>
+          <h1>Adicionar alunos à turma {Turma.nome}</h1>
           {!!saveFeedBack && <div className="alert alert-success aler" role="alert">
             <p>Os dados foram salvos com sucesso</p>
           </div>
@@ -29,22 +28,31 @@ class UpdateTurma extends Component {
         </div>
         <div className="row">
           <div className="col-md-4 mr-5">
-            <form onSubmit={this.handleSubmit}>
               <div className="card" style={{ width: '18rem' }}>
                 <div className="card-header">
                   <b>Alunos da turma: {Turma.nome}</b>
                 </div>
                 <ul className="list-group list-group-flush">
-                  {AlunosDaTurma.length == 0 && <li className="list-group-item" >Lista vazia</li>}
-                  {AlunosDaTurma.map((a) => (
-                    <li className="list-group-item" key={a.aluno/*id*/}>{a.nomeAluno}</li>
+                  {Object.keys(AlunosDaTurma).length == 0 && <li className="list-group-item" >Lista vazia</li>}
+                  {Object.keys(AlunosDaTurma).map((key) => (
+                    <li className="list-group-item d-flex" key={key}>
+                      <p>{AlunosDaTurma[key].nomeAluno} </p>
+                      <button className="btn btn-danger ml-auto"
+                        onClick={this.handleRemove(key, AlunosDaTurma[key].turmaAlunoId)}>-</button>
+                    </li>
                   ))}
                 </ul>
                 <div className="card-footer">
-                  <button type='submit' className="btn btn-success">Salvar</button >
+            <form onSubmit={this.handleSubmit}>
+
+                  <button type='submit'
+                    className="btn btn-success">
+                    Salvar
+                    </button >
+            </form>
+
                 </div>
               </div>
-            </form>
           </div>
 
           <div className="col-md-4 mr-5">
@@ -58,15 +66,18 @@ class UpdateTurma extends Component {
                   <li className="list-group-item" key={a._id}>
                     <input name={a._id}
                       id={a._id}
-                      class="form-check-input"
+                      className="form-check-input"
                       type="checkbox"
                       defaultChecked={false}
+                      checked={AlunosDaTurma.hasOwnProperty(a._id)}
                       title={a.nome}
                       onChange={this.handleInputChange}
+                      disabled={AlunosDaTurma.hasOwnProperty(a._id)}
                     />
-                    <label class="form-check-label" for={a._id}>
+                    <label class="form-check-label ml-2" for={a._id}>
                       {a.nome}
-                    </label></li>
+                    </label>
+                  </li>
                 ))}
               </ul>
             </div>
@@ -76,53 +87,71 @@ class UpdateTurma extends Component {
     )
   }
 
-  handleClick = (alunoId, nomeAluno) => (event) => {
-    const turmaId = this.state.Turma._id
-    this.setState(prevState => ({
-      AlunosDaTurma: [...prevState.AlunosDaTurma, { turma: turmaId, aluno: alunoId, nomeAluno, }]
-    }))
+  handleRemove = (alunoId, turmaAlunoId) =>  (event) => {
+    event.preventDefault()
+    //Pegando os alunos menos o removido
+    let { [alunoId]: alunoRemovido, ...restoDosAlunos } = this.state.AlunosDaTurma
+    if (turmaAlunoId !== undefined) {//Se o aluno veio do banco, remove.
+       fetch(`http://localhost:3003/sistema/TurmaAluno/${turmaAlunoId}`, {
+        method: "delete"
+      })
+        .then(data => {
+          if (data.ok) {
+            console.log("ELiminado");
+          }
+        }).catch(err => {
+          console.error(err)
+        })
+    }
+    this.setState({
+      AlunosDaTurma: restoDosAlunos
+    })
   }
 
-  // Metodo para atualizar o estado do campo
   handleInputChange = event => {
     const target = event.target;
-    const alunoId = target.name;     //pega o nome do camo atravez do target
+    const alunoId = target.name;
     const checked = target.checked
     const nomeAluno = target.title
 
-    const turmaId = this.state.Turma._id
-
-    if (checked) {
-
+    if (checked && !this.state.AlunosDaTurma.hasOwnProperty(alunoId)) {
       this.setState(prevState => ({
-        AlunosDaTurma: [...prevState.AlunosDaTurma, { turma: turmaId, aluno: alunoId, nomeAluno: nomeAluno }]
-      }));
-    } else {
-      let alunos = this.state.AlunosDaTurma.filter((a) => a.aluno !== alunoId)
-      this.setState({
-        AlunosDaTurma: alunos
-      })
+        AlunosDaTurma: { ...prevState.AlunosDaTurma, [alunoId]: { nomeAluno, turmaAlunoId: undefined } }
+      }
+      ));
     }
   };
 
   //metodo para salvar os dados
   handleSubmit = event => {
-    console.log("SUBMIT");
     event.preventDefault();
+    const alunosDaTurma = this.state.AlunosDaTurma
 
-    fetch("http://localhost:3003/sistema/TurmaAluno", {
-      method: "post",
-      body: JSON.stringify(this.state.AlunosDaTurma),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(data => {     //vereficar os dados
-      if (data.ok)
+    let alunosFiltrados = []
+    Object.keys(alunosDaTurma).forEach(key => {
+      if (alunosDaTurma[key].turmaAlunoId === undefined)
+        alunosFiltrados.push({
+          aluno: key,
+          turma: this.state.Turma._id
+        })
+    });
+    console.log("SUBMIT ", alunosFiltrados);
+
+    if (alunosFiltrados.length > 0) {
+
+      fetch(`http://localhost:3003/sistema/TurmaAluno`, {
+        method: "post",
+        body: JSON.stringify(alunosFiltrados),
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }).then(data => {
+        if (data.ok) this.loadTurmaAluno()
         this.setState({
           saveFeedBack: data.ok ? 'sucesso' : 'falha'
-        });
-
-    })
+        })
+      })
+    }
   }
 
   componentDidMount() {
@@ -148,24 +177,25 @@ class UpdateTurma extends Component {
 
   async loadTurmaAluno() {
     const { id } = this.props.match.params;
-    // pegando o ID da url através do props
-    const response = await api.get(`/TurmaAluno?turma=${id}`); //buscar dos dados no banco
+    const response = await api.get(`/TurmaAluno?turma=${id}`);
     const { docs: alunosDaTurma } = response.data
+
     this.setState({
-      AlunosDaTurma: alunosDaTurma.map((adt) => {
-        return {
-          aluno: adt.aluno._id,
-          turma: id,
-          nomeAluno: adt.aluno.nome
-        }
-      })
+      AlunosDaTurma: alunosDaTurma.reduce((accumulator, current) =>
+        Object.assign(/*target*/accumulator,
+          /*source*/{
+            [current.aluno._id]: {
+              nomeAluno: current.aluno.nome,
+              turmaAlunoId: current._id
+            }
+          })
+        , {})
     })
   }
 
   async loadPublicoAtendido() {
     const response = await api.get(`/CadastroPublico`)
-    const { docs: pa, ...info } = response.data
-    console.log("ALUNOS ", pa);
+    const { docs: pa } = response.data
     this.setState({
       PublicoAtendido: pa
     })

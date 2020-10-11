@@ -27,12 +27,13 @@ module.exports={
     },
     //metodo de Atualizar
     async atualizar(req, res){
-        const turmaaluno = await TurmaAluno.findByIdAndUpdate(req.params.id, req.body, {new: true});
+        const turmaaluno = await TurmaAluno.findOne(req.params.id)
         console.log(req.body)
         return res.json(turmaaluno);
     },
     async delete(req, res){
-        await TurmaAluno.findByIdAndRemove(req.params.id);
+        let a = await TurmaAluno.findByIdAndDelete(req.params.id)
+        console.log(a)
         return res.send();
     },
 }

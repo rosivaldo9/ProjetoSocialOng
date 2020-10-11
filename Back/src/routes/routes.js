@@ -137,6 +137,7 @@ routes.get('/TurmaAluno', TurmaAluno.index);//lista
 routes.get('/TurmaAluno/:id', TurmaAluno.detalhes);//detalhes
 routes.put('/TurmaAluno/:id', TurmaAluno.atualizar);//atualizar
 routes.delete('/TurmaAluno/:id', TurmaAluno.delete);//deletar 
+//routes.delete('/TurmaAluno', TurmaAluno.delete);//deletar 
 
 //Rotas Frequencia
 routes.post('/Frequencia', Frequencia.insert);//salvar
