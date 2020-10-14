@@ -12,7 +12,7 @@ const Header = () =>
                 <Link to="/profile/educacao/turma-aluno">  <a className="nav-link botIndex" href="#">Turma Aluno </a></Link>
             </li>
             <li className="nav-item">
-                <Link to="/profile/educacao/frequencia"> <a className="nav-link botIndex" href="#">Frequencia</a></Link>
+                <Link to="/profile/educacao/cadastro-frequencia"> <a className="nav-link botIndex" href="#">Frequencia</a></Link>
             </li>
         </ul>
     )

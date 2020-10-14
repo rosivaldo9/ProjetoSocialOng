@@ -143,7 +143,7 @@ routes.delete('/TurmaAluno/:id', TurmaAluno.delete);//deletar
 routes.post('/Frequencia', Frequencia.insert);//salvar
 routes.get('/Frequencia', Frequencia.index);//lista
 routes.get('/Frequencia/:id', Frequencia.detalhes);//detalhes
-routes.put('/Frequencia/:id', Frequencia.atualizar);//atualizar
+routes.put('/Frequencia', Frequencia.atualizar);//atualizar
 routes.delete('/Frequencia/:id', Frequencia.delete);//deletar 
 
 routes.post('/user', User.insert);//salvar

@@ -17,7 +17,7 @@ app.use('/assets', express.static(path.join(__dirname, 'src/assets')))
 
 
     //conexão com banco de dados
-mongoose.connect("mongodb://localhost/test", {useNewUrlParser:true, useUnifiedTopology: true});
+mongoose.connect("mongodb://localhost/test", {useNewUrlParser:true, useUnifiedTopology: true, useFindAndModify: false});
 
 
 //centraliza os models nessa pasta

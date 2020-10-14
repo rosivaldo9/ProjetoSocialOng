@@ -69,10 +69,10 @@ class UpdateTurma extends Component {
                       className="form-check-input"
                       type="checkbox"
                       defaultChecked={false}
-                      checked={AlunosDaTurma.hasOwnProperty(a._id)}
+                      checked={AlunosDaTurma.hasOwnProperty(a._id)} //marcado se ja existe no array
                       title={a.nome}
                       onChange={this.handleInputChange}
-                      disabled={AlunosDaTurma.hasOwnProperty(a._id)}
+                      disabled={AlunosDaTurma.hasOwnProperty(a._id)} // desativado se ja existe no array
                     />
                     <label class="form-check-label ml-2" for={a._id}>
                       {a.nome}
@@ -114,6 +114,7 @@ class UpdateTurma extends Component {
     const checked = target.checked
     const nomeAluno = target.title
 
+    //adicionar PA a lista de Alunos da turma se a key alunoId não existir
     if (checked && !this.state.AlunosDaTurma.hasOwnProperty(alunoId)) {
       this.setState(prevState => ({
         AlunosDaTurma: { ...prevState.AlunosDaTurma, [alunoId]: { nomeAluno, turmaAlunoId: undefined } }
@@ -128,6 +129,7 @@ class UpdateTurma extends Component {
     const alunosDaTurma = this.state.AlunosDaTurma
 
     let alunosFiltrados = []
+    //filtrando alunos que não existem no banco e retornado em formato para envio
     Object.keys(alunosDaTurma).forEach(key => {
       if (alunosDaTurma[key].turmaAlunoId === undefined)
         alunosFiltrados.push({
@@ -166,8 +168,7 @@ class UpdateTurma extends Component {
 
   async loadTurma() {
     const { id } = this.props.match.params;
-    // pegando o ID da url através do props
-    const response = await api.get(`/Turma/${id}`); //buscar dos dados no banco
+    const response = await api.get(`/Turma/${id}`); //buscar dos dados da turma selecionada
     const turma = response.data
 
     this.setState({
@@ -180,6 +181,7 @@ class UpdateTurma extends Component {
     const response = await api.get(`/TurmaAluno?turma=${id}`);
     const { docs: alunosDaTurma } = response.data
 
+    //pegando Turma&Aluno e retornando no formato chave valor
     this.setState({
       AlunosDaTurma: alunosDaTurma.reduce((accumulator, current) =>
         Object.assign(/*target*/accumulator,

@@ -9,7 +9,7 @@ const Frequencia = new mongoose.Schema({
     data: {
         type: String,
         required: true,
-        default: new Date().toLocaleString()
+        default: new Date().toLocaleDateString().substr(0,10)
     },
     turma: {
         type: Schema.Types.ObjectId,

@@ -6,7 +6,7 @@ function filtro(props) {
     for (var i = 0; i < props.length; i++) {
         t.push(props[i]);
         t[i]["nome"] = <Link to={`/profile/educacao/update-turma/${props[i]["_id"]}`}>{props[i]["nome"]}</Link>
-        //t[i]["detalhes"] = <Link to={`/profile/educacao/detalhes-turma/${props[i]["_id"]}`}>Detalhes</Link>
+        t[i]["frequencia"] = <Link to={`/profile/educacao/cadastro-frequencia/${props[i]["_id"]}`}>Frequencia</Link>
         t[i]["deletar"] = <button><Link to={`/profile/educacao/deletar-turma/${props[i]["_id"]}`}>Deletar</Link></button>
     }
     return t;

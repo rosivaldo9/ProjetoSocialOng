@@ -16,12 +16,12 @@ const DatatablePage = (props) => {
           'aria-label': 'Name',
         },
       },
-      // {
-      //   label: 'Detalhes',
-      //   field: 'detalhes',
-      //   sort: 'asc',
-      //   width: 200
-      // },
+      {
+        label: 'Frequência',
+        field: 'frequencia',
+        sort: 'asc',
+        width: 200
+      },
       {
         label: 'Deletar',
         field: 'deletar',
