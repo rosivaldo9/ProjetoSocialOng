@@ -43,14 +43,13 @@ class UpdateTurma extends Component {
                   ))}
                 </ul>
                 <div className="card-footer">
-            <form onSubmit={this.handleSubmit}>
+                <form onSubmit={this.handleSubmit}>
 
                   <button type='submit'
                     className="btn btn-success">
                     Salvar
                     </button >
-            </form>
-
+               </form>
                 </div>
               </div>
           </div>
