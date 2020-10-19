@@ -12,6 +12,7 @@ class CriarTurma extends Component {
             Turma: {
                 nome: ''
             },
+            Turmas: [],
             saveFeedBack: '',
         }
     }
@@ -20,7 +21,6 @@ class CriarTurma extends Component {
 
         return (
             <div className='container'>
-                <h2 className="text-center">Cadastro de turma</h2>
                 <div className="col-6 mt-5">
                     {saveFeedBack &&
                         <div className="alert alert-success aler" role="alert">
@@ -33,6 +33,10 @@ class CriarTurma extends Component {
                             placeholder="Nome da turma" />
                         <button className='btn btn-success ml-2' type="submit">Salvar</button>
                     </form>
+
+                </div>
+                <div className="col-6 mt-5">
+                    <Turmas turmas={this.state.Turmas} />
                 </div>
             </div>
         )
@@ -60,13 +64,26 @@ class CriarTurma extends Component {
             }
         })
             .then(data => {     //vereficar os dados
+                if(data.ok) this.loadTurmas()
                 this.setState({
                     saveFeedBack: data.ok ? 'sucesso' : 'falha'
                 });
 
             })
         event.preventDefault();
-    }  
+    }
+
+    componentDidMount() {
+        this.loadTurmas()
+    }
+
    
+    async loadTurmas() {
+        const response = await api.get(`/Turma`); //buscar dos dados no banco
+        const { docs: turmas, ...info } = response.data
+        this.setState({
+            Turmas: turmas
+        })
+    }
 }
 export default CriarTurma;

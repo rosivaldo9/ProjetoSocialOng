@@ -420,7 +420,7 @@ module.exports = {
         dataFinal = data.setMonth(1)
         dataFinal = data.setFullYear(anoFinal)
 
-        const anoInicial = dat.getFullYear() - 17;
+        const anoInicial = data.getFullYear() - 17;
         var dataInicial;
         dataInicial = data.setDate(1)
         dataInicial = data.setMonth(1)

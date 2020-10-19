@@ -2,204 +2,83 @@ import React, { Component } from 'react';
 import api from '../../service/service';//import url base
 
 
-class UpdateTurma extends Component {
-  constructor() {
-    super();
+class AtualizarTurma extends Component {
+    constructor() {
+        super();
 
-    this.state = {
-      Turma: {
-        nome: ''
-      },
-      PublicoAtendido: [],
-      AlunosDaTurma: {},
-      saveFeedBack: null,
-    }
-  }
-  render() {
-    const { saveFeedBack, PublicoAtendido, AlunosDaTurma, Turma } = this.state;
-    return (
-      <div className='container'>
-        <div className="col-12">
-          <h1>Adicionar alunos à turma {Turma.nome}</h1>
-          {!!saveFeedBack && <div className="alert alert-success aler" role="alert">
-            <p>Os dados foram salvos com sucesso</p>
-          </div>
-          }
-        </div>
-        <div className="row">
-          <div className="col-md-4 mr-5">
-              <div className="card" style={{ width: '18rem' }}>
-                <div className="card-header">
-                  <b>Alunos da turma: {Turma.nome}</b>
-                </div>
-                <ul className="list-group list-group-flush">
-                  {Object.keys(AlunosDaTurma).length == 0 && <li className="list-group-item" >Lista vazia</li>}
-                  {Object.keys(AlunosDaTurma).map((key) => (
-                    <li className="list-group-item d-flex" key={key}>
-                      <p>{AlunosDaTurma[key].nomeAluno} </p>
-                      <button className="btn btn-danger ml-auto"
-                        onClick={this.handleRemove(key, AlunosDaTurma[key].turmaAlunoId)}>-</button>
-                    </li>
-                  ))}
-                </ul>
-                <div className="card-footer">
-                <form onSubmit={this.handleSubmit}>
-
-                  <button type='submit'
-                    className="btn btn-success">
-                    Salvar
-                    </button >
-               </form>
-                </div>
-              </div>
-          </div>
-
-          <div className="col-md-4 mr-5">
-            <div className="card" style={{ width: '18rem' }}>
-              <div className="card-header">
-                <b>PublicoAtendido</b>
-              </div>
-              <ul className="list-group list-group-flush">
-                {PublicoAtendido.length == 0 && <li className="list-group-item" >Lista vazia</li>}
-                {PublicoAtendido.map((a) => (
-                  <li className="list-group-item" key={a._id}>
-                    <input name={a._id}
-                      id={a._id}
-                      className="form-check-input"
-                      type="checkbox"
-                      defaultChecked={false}
-                      checked={AlunosDaTurma.hasOwnProperty(a._id)} //marcado se ja existe no array
-                      title={a.nome}
-                      onChange={this.handleInputChange}
-                      disabled={AlunosDaTurma.hasOwnProperty(a._id)} // desativado se ja existe no array
-                    />
-                    <label class="form-check-label ml-2" for={a._id}>
-                      {a.nome}
-                    </label>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  handleRemove = (alunoId, turmaAlunoId) =>  (event) => {
-    event.preventDefault()
-    //Pegando os alunos menos o removido
-    let { [alunoId]: alunoRemovido, ...restoDosAlunos } = this.state.AlunosDaTurma
-    if (turmaAlunoId !== undefined) {//Se o aluno veio do banco, remove.
-       fetch(`http://localhost:3003/sistema/TurmaAluno/${turmaAlunoId}`, {
-        method: "delete"
-      })
-        .then(data => {
-          if (data.ok) {
-            console.log("ELiminado");
-          }
-        }).catch(err => {
-          console.error(err)
-        })
-    }
-    this.setState({
-      AlunosDaTurma: restoDosAlunos
-    })
-  }
-
-  handleInputChange = event => {
-    const target = event.target;
-    const alunoId = target.name;
-    const checked = target.checked
-    const nomeAluno = target.title
-
-    //adicionar PA a lista de Alunos da turma se a key alunoId não existir
-    if (checked && !this.state.AlunosDaTurma.hasOwnProperty(alunoId)) {
-      this.setState(prevState => ({
-        AlunosDaTurma: { ...prevState.AlunosDaTurma, [alunoId]: { nomeAluno, turmaAlunoId: undefined } }
-      }
-      ));
-    }
-  };
-
-  //metodo para salvar os dados
-  handleSubmit = event => {
-    event.preventDefault();
-    const alunosDaTurma = this.state.AlunosDaTurma
-
-    let alunosFiltrados = []
-    //filtrando alunos que não existem no banco e retornado em formato para envio
-    Object.keys(alunosDaTurma).forEach(key => {
-      if (alunosDaTurma[key].turmaAlunoId === undefined)
-        alunosFiltrados.push({
-          aluno: key,
-          turma: this.state.Turma._id
-        })
-    });
-    console.log("SUBMIT ", alunosFiltrados);
-
-    if (alunosFiltrados.length > 0) {
-
-      fetch(`http://localhost:3003/sistema/TurmaAluno`, {
-        method: "post",
-        body: JSON.stringify(alunosFiltrados),
-        headers: {
-          "Content-Type": "application/json"
+        this.state = {
+            Turma: {
+                nome: ''
+            },
+            saveFeedBack: '',
         }
-      }).then(data => {
-        if (data.ok) this.loadTurmaAluno()
-        this.setState({
-          saveFeedBack: data.ok ? 'sucesso' : 'falha'
-        })
-      })
     }
-  }
+    render() {
+        const { saveFeedBack } = this.state;
 
-  componentDidMount() {
-    this.loadTurma()
-    this.loadPublicoAtendido()
-    this.loadTurmaAluno()
-  }
+        return (
+            <div className='container'>
+                <h2 className="text-center">Atulização de dados da turma</h2>
 
-  componentDidUpdate() {
-    console.log("ADT", this.state.AlunosDaTurma);
-  }
+                <div className="col-6 mt-5">
+                    {saveFeedBack &&
+                        <div className="alert alert-success aler" role="alert">
+                            <p>{saveFeedBack}</p>
+                        </div>}
 
-  async loadTurma() {
-    const { id } = this.props.match.params;
-    const response = await api.get(`/Turma/${id}`); //buscar dos dados da turma selecionada
-    const turma = response.data
+                    <form onSubmit={this.handleSubmit}>
+                        <input type="text" name='nome'
+                            onChange={this.handleInputChange}
+                            placeholder="Nome da turma" 
+                            value={this.state.Turma.nome}/>
+                        <button className='btn btn-success ml-2' type="submit">Atualizar</button>
+                    </form>
+                </div>
+            </div>
+        )
+    }
 
-    this.setState({
-      Turma: turma
-    })
-  }
+    // Metodo para atualizar o estado do campo
+    handleInputChange = event => {
+        const target = event.target;
+        const name = target.name;     //pega o nome do camo atravez do target
+        const value = target.value;   //pega o valor do camo atravez do target
 
-  async loadTurmaAluno() {
-    const { id } = this.props.match.params;
-    const response = await api.get(`/TurmaAluno?turma=${id}`);
-    const { docs: alunosDaTurma } = response.data
+        this.setState(prevState => ({
+            Turma: { ...prevState.Turma, [name]: value } //atualizando o estado do campo com o value
+        }));
 
-    //pegando Turma&Aluno e retornando no formato chave valor
-    this.setState({
-      AlunosDaTurma: alunosDaTurma.reduce((accumulator, current) =>
-        Object.assign(/*target*/accumulator,
-          /*source*/{
-            [current.aluno._id]: {
-              nomeAluno: current.aluno.nome,
-              turmaAlunoId: current._id
+    };
+
+    //metodo para salvar os dados
+    handleSubmit = event => {
+       const turma = this.state.Turma
+
+        fetch(`http://localhost:3003/sistema/Turma/${turma._id}`, {
+            method: "put",
+            body: JSON.stringify(turma),
+            headers: {
+                "Content-Type": "application/json"
             }
-          })
-        , {})
-    })
-  }
+            }).then(data => {     //vereficar os dados
+                this.setState({
+                    saveFeedBack: data.ok ? 'Atualizado com sucesso!' : 'Houve um erro.'
+                });
+            })
+        event.preventDefault();
+    }  
 
-  async loadPublicoAtendido() {
-    const response = await api.get(`/CadastroPublico`)
-    const { docs: pa } = response.data
-    this.setState({
-      PublicoAtendido: pa
-    })
-  }
+    componentDidMount(){
+        this.loadTurma()
+    }
+
+    async loadTurma(){
+        const {id} = this.props.match.params
+        const response = await api.get(`/Turma/${id}`)
+        this.setState({
+            Turma: response.data
+        })
+    }
+   
 }
-export default UpdateTurma;
+export default AtualizarTurma;

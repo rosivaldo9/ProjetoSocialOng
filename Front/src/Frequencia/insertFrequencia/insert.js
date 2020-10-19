@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import api from '../../service/service';//import url base
 
 
-class UpdateFrequencia extends Component {
+class Frequencia extends Component {
   constructor() {
     super();
 
@@ -12,17 +12,17 @@ class UpdateFrequencia extends Component {
       },
       Frequencia: [],
       saveFeedBack: null,
-      data: new Date().toLocaleDateString().substr(0, 10)//TODO mudar para props
+      data: new Date().toLocaleDateString().substr(0, 10)
     }
   }
   render() {
     const { saveFeedBack, Frequencia, Turma, data } = this.state;
     return (
-      <div className='container '>
+      <div className='container'>
         <div className="col-12">
-          <center><h3>Atualização de frequência turma: {Turma.nome}</h3></center>
+        <center><h3>Nova frequência turma: {Turma.nome}</h3></center>
           {!!saveFeedBack && <div className="alert alert-success aler" role="alert">
-            <p>{saveFeedBack}</p>
+          <p>{saveFeedBack}</p>
           </div>
           }
         </div>
@@ -30,24 +30,23 @@ class UpdateFrequencia extends Component {
           <div className="col-md-4 mr-5">
             <div className="card" style={{ width: '18rem' }}>
               <div className="card-header">
-                <b>Alunos presentes </b><i>{data}</i>
+                <b>Alunos presentes   </b><i>{data}</i>
               </div>
               <form onSubmit={this.handleSubmit}>
                 <ul className="list-group list-group-flush">
                   {Frequencia.length == 0 && <li className="list-group-item" >Lista vazia</li>}
                   {Frequencia.map((frequencia, index) => (
-                    <li className="list-group-item" key={frequencia._id}>
-                      <input name={frequencia._id}
+                    <li className="list-group-item" key={frequencia.aluno._id}>
+                      <input name={frequencia.aluno._id}
                         tabIndex={index}
-                        id={frequencia._id}
+                        id={frequencia.aluno._id}
                         className="form-check-input"
                         type="checkbox"
                         checked={frequencia.presente}
-                        title={frequencia.aluno.nome}
                         onChange={this.handleInputChange}
                       />
-                      <label class="form-check-label ml-2" for={frequencia._id}>
-                        {frequencia.aluno.nome}
+                      <label class="form-check-label ml-2" for={frequencia.aluno._id}>
+                        {frequencia.nomeAluno}
                       </label>
                     </li>
                   ))}
@@ -83,53 +82,59 @@ class UpdateFrequencia extends Component {
     event.preventDefault();
     const alunosDaTurma = this.state.Frequencia
 
-    console.log("SUBMIT ", alunosDaTurma);
-
     fetch(`http://localhost:3003/sistema/Frequencia`, {
-      method: "put",
+      method: "post",
       body: JSON.stringify(alunosDaTurma),
       headers: {
         "Content-Type": "application/json"
       }
     }).then(data => {
-      console.log(data.json());
       this.setState({
         saveFeedBack: data.ok ? 'Os dados foram atualizados com sucesso!' : 'Erro ao atualizar'
       })
+
+      return data.json()
+    }).then(d => {
+        console.log(d);
     })
   }
 
   componentDidMount() {
     this.loadTurma()
-    this.loadFrequencia()
+    this.loadTurmaAluno()
   }
 
   componentDidUpdate() {
-    //console.log("ADT", this.state.Frequencia);
-    const params = this.props;
-    console.log("params", params);
+    console.log("ADT", this.state.Frequencia);
   }
 
   async loadTurma() {
-    const { idTurma, data } = this.props.location.state;
-    const response = await api.get(`/Turma/${idTurma}`); //buscar dos dados no banco
+    const { id } = this.props.match.params;
+    // pegando o ID da url através do props
+    const response = await api.get(`/Turma/${id}`); //buscar dos dados no banco
     const turma = response.data
 
     this.setState({
-      Turma: turma,
-      data
+      Turma: turma
     })
   }
 
-  async loadFrequencia() {
-    const { idTurma, data } = this.props.location.state;
-    const response = await api.get(`/Frequencia?turma=${idTurma}&data=${data}`);
-    const { docs: frequencia } = response.data
-
-      this.setState({
-        Frequencia: frequencia
+  async loadTurmaAluno() {
+    const { id } = this.props.match.params;
+    const response = await api.get(`/TurmaAluno?turma=${id}`);
+    const { docs: alunosDaTurma} = response.data
+ 
+    let alunosModificados = alunosDaTurma.map((current) =>
+    ({
+        turma: current.turma._id,
+        aluno: current.aluno._id,
+        nomeAluno: current.aluno.nome,
+        presente: false
       })
-    }
+    )
+    this.setState({
+      Frequencia: alunosModificados
+    }) 
   }
-
-export default UpdateFrequencia;
+}
+export default Frequencia;

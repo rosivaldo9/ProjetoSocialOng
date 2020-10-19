@@ -7,7 +7,7 @@ const DatatablePage = (props) => {
     columns: [
 
       {
-        label: 'Nome',
+        label: 'Turma',
         field: 'nome',
         sort: 'asc',
         width: 270,
@@ -17,12 +17,11 @@ const DatatablePage = (props) => {
         },
       },
       {
-        label: 'Deletar',
-        field: 'deletar',
+        label: 'Frequência',
+        field: 'frequencia',
         sort: 'asc',
         width: 200
       },
-
     ],
     rows: props.rows
 
@@ -35,7 +34,7 @@ const DatatablePage = (props) => {
     data={data}
     hover
     entriesOptions={[5, 10, 15, 20, 25, 30]}
-    entries={15}
+    entries={5}
     pagesAmount={4}
     noBottomColumns
   />

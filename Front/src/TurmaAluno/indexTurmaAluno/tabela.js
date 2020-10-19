@@ -1,28 +1,20 @@
 import React from 'react';
 import { MDBDataTable, MDBFooter } from 'mdbreact';
 
-const DatatablePage = (props) => {
+const Datatab = (props) => {
 
   const data = {
     columns: [
 
       {
-        label: 'Nome',
+        label: 'Selecione uma turma para adicionar ou remover alunos',
         field: 'nome',
         sort: 'asc',
-        width: 270,
         attributes: {
           'aria-controls': 'DataTable',
           'aria-label': 'Name',
         },
-      },
-      {
-        label: 'Deletar',
-        field: 'deletar',
-        sort: 'asc',
-        width: 200
-      },
-
+      }
     ],
     rows: props.rows
 
@@ -42,4 +34,4 @@ const DatatablePage = (props) => {
 }
 
 
-export default DatatablePage
+export default Datatab

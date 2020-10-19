@@ -4,8 +4,8 @@ import { Redirect, Link } from 'react-router-dom';
 import api from '../../service/service';
 
 class DeleteTurma extends Component {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super();
 
         this.state = {
             Turma: {},
@@ -29,19 +29,20 @@ class DeleteTurma extends Component {
         const { redirect } = this.state;
         
         if (redirect) {
-            return <Redirect exact from='/educacao/deletar-turma/:id' to='/educacao/cadastro-turma'/>
+            return <Redirect exact from='/profile/educacao/deletar-turma/:id' to='/profile/educacao/turmas'/>
         } else {
             return (
-                <fieldset>
-                    <legend>Deletar Turma</legend>
-                    <div>
-                        <p>Tem certeza que deja deletar a turma "{this.state.Turma.nome}" </p>
-                        <button type="button" className="btn btn-danger btn-lg" onClick={this.handleClick}>Remover</button>
-                    </div>
-                    <br/>
+                <div className="container">
+                <h2 className="text-center">Remover turma</h2>
+                <p className="alert alert-danger">
+                    Tem certeza que deja remover a turma <b>"{this.state.Turma.nome}"</b>, 
+                    esta ação também removerá os alunos desta turma e sua frequência.
+                </p>
 
-                  <button type="button" className="btn btn-warning btn-lg"> <Link to="/profile/educacao/cadastro-turma">Voltar</Link></button> 
-                </fieldset>
+          
+                <button type="button" className="btn btn-outline-danger btn-lg" onClick={this.handleClick}>Remover</button>
+               <Link className="btn btn-outline-secondary btn-lg" to="/profile/educacao/turmas">Voltar</Link>
+                </div >
             )
         }
     }

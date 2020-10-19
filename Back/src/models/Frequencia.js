@@ -15,13 +15,11 @@ const Frequencia = new mongoose.Schema({
         type: Schema.Types.ObjectId,
         ref: "Turma",
         required: true,
-        autopopulate: true
     },
     aluno: {
         type: Schema.Types.ObjectId,
         ref: "PublicoAtendido",
         required: true,
-        //autopopulate: true
     },
     presente: {
         type: Boolean,

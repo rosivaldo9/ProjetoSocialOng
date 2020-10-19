@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
 const Turma = mongoose.model('Turma');
+const TurmaAluno = mongoose.model('TurmaAluno')
+const Frequencia = mongoose.model('Frequencia')
+
+
 
 module.exports={
     //metodo salvar
@@ -20,12 +24,17 @@ module.exports={
     },
     //metodo de Atualizar
     async atualizar(req, res){
+        console.log(req.params.id);
+
         const turma = await Turma.findByIdAndUpdate(req.params.id, req.body, {new: true});
         return res.json(turma);
     },
     //metodo atualizar
     async delete(req, res){
-        await Turma.findByIdAndRemove(req.params.id);
+        const idTurma = req.params.id
+        await Turma.findByIdAndRemove(idTurma);
+        await TurmaAluno.deleteMany({turma: idTurma})
+        await Frequencia.deleteMany({turma: idTurma})
         return res.send();
     },
 }

@@ -5,12 +5,14 @@ module.exports = {
     //metodo salvar
     async insert(req, res) {
         let result = req.body.filter(async (f) => {
+            //verificar se a frequencia com data, aluno e turma passados existe
             let r = await Frequencia.findOne(
                 {
                     data: f.data,
                     turma: f.turma,
                     aluno: f.aluno
                 })
+                //se não existir cria uma nova
             if (r == null) {
                 await Frequencia.create(f);
             }
@@ -25,7 +27,7 @@ module.exports = {
         const { page } = req.query;
         console.log(req.query);
         const frequencia = await Frequencia.paginate(
-            {turma:req.query.turma, data: req.query.data},
+            req.query,
             {
                 populate: [
                     { path: 'aluno', select: '_id nome' },
