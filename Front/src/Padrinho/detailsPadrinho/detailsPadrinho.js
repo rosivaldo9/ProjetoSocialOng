@@ -140,8 +140,8 @@ export default class DetailsPadrinho extends Component {
                         </div>
                         
                     </div>
-                    <Link to={`/page24/${Padrinho._id}`}><button type="button" className="btn btn-warning btn-lg">Editar</button></Link>
-                    <Link to={`/page25/${Padrinho._id}`}><button  type="button" className="btn btn-info btn-lg">Deletar</button></Link>
+                    <Link to={`/profile/padrinho/editar/${Padrinho._id}`}><button type="button" className="btn btn-warning btn-lg mr-2">Editar</button></Link>
+                    <Link to={`/profile/padrinho/remover/${Padrinho._id}`}><button  type="button" className="btn btn-danger btn-lg">Remover</button></Link>
                     </div>
                   
                     </div>

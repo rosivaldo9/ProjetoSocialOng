@@ -5,8 +5,6 @@ const DatatablePage = (props) => {
 
   const data = {
     columns: [
-     
-  
       {
         label: 'Receita',
         field: 'receita',

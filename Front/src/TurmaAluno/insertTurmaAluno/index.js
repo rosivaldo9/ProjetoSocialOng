@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../service/service';//import url base
+import api, { API_ADDRESS } from '../../service/service';//import url base
 
 import Turmas from '../indexTurma'
 import './insert.css';
@@ -56,7 +56,7 @@ class CriarTurma extends Component {
 
     //metodo para salvar os dados
     handleSubmit = event => {
-        fetch("http://localhost:3003/sistema/Turma", {
+        fetch(`${API_ADDRESS}/Turma`, {
             method: "post",
             body: JSON.stringify(this.state.Turma),
             headers: {

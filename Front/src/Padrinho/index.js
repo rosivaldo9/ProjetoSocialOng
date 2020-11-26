@@ -20,11 +20,11 @@ export default class index extends Component {
 
           <section>
             <Switch>
-              <Route path="/page21" component={Insert} />
-              <Route path="/page22" component={Lista} />
-              <Route path="/page23/:id" component={Detalhes} />
-              <Route path="/page24/:id" component={Editar} />
-              <Route path="/page25/:id" component={Deletar} />
+              <Route path="/profile/padrinho/cadastro" component={Insert} />
+              <Route path="/profile/padrinho/lista" component={Lista} />
+              <Route path="/profile/padrinho/detalhes/:id" component={Detalhes} />
+              <Route path="/profile/padrinho/editar/:id" component={Editar} />
+              <Route path="/profile/padrinho/remover/:id" component={Deletar} />
             </Switch>
           </section>
         </Router>

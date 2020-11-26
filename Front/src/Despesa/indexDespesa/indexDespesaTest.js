@@ -10,7 +10,7 @@ export default class indexDespesa extends Component {
         Despesa: [], //dados da tabela
         DespesaInfo: {},  //informações necessarias para paginação e apresentação dos dados
     };
-    componentDidMount() { // metodo executa automatico quando inicia a aplicação
+    componentDidMount () { // metodo executa automatico quando inicia a aplicação
         this.loadDespesa();
     }
 
@@ -20,32 +20,28 @@ export default class indexDespesa extends Component {
         this.setState({ Despesa: docs, DespesaInfo }); // setando o estado de Pu.At. com informações da lista do banco 
     }
 
-    render() {
-        const { Despesa, DespesaInfo } = this.state; // definir variaveis em seu estado atual, carregadas com a lista
+    render () {
+        const { Despesa } = this.state; // definir variaveis em seu estado atual, carregadas com a lista
         return (
             <div>
-                <Data row={filtro(this.state.Despesa)} />
+                <Data row={filtro(Despesa)} />
             </div>
         );
     }
 }
 
-function filtro(props) {
+function filtro (props) {
+    var t = []
+    for (var i = 0; i < props.length; i++) {
+        t.push(props[i]);
+        t[i]["detalhes"] = <Link to={`/profile/despesa/detalhes/${props[i]["_id"]}`}>Detalhes</Link>
+        t[i]["dataa"] = <Moment utc='GMT-3' format="DD/MM/YYYY" date={props[i]["data"]}></Moment>
+        t[i]["valorr"] = props[i]["valor"] + "  R$ ";
+    }
 
 
 
- var t = []
-   for(var i =0; i<props.length; i++){
-    t.push(props[i]);
-    t[i]["detalhes"]= <Link to={`/page28/${props[i]["_id"]}`}>Detalhes</Link>
-    t[i]["dataa"] = <Moment  format="DD/MM/YYYY" date={props[i]["data"]}></Moment>
-    t[i]["valorr"] = props[i]["valor"]+"  R$ ";
-
-}
-
-
-   
-   return t;
+    return t;
 }
 
 
@@ -53,13 +49,13 @@ function filtro(props) {
 
 
 
-function btn(props){
-    var t=[];
-     for(var i =0; i<props.length; i++){
-       t[i].push('detalhes');
-}
-console.log(props);
-return props;
+function btn (props) {
+    var t = [];
+    for (var i = 0; i < props.length; i++) {
+        t[i].push('detalhes');
+    }
+    console.log(props);
+    return props;
 }
 
 

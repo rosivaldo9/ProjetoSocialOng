@@ -39,9 +39,9 @@ class IndexTurma extends Component {
 function filtro(props) {
     var t = []
     for (var i = 0; i < props.length; i++) {
-        t.push(props[i]);
-        t[i]["nome"] = <Link to={`/profile/educacao/detalhes-turma/${props[i]["_id"]}`}>{props[i]["nome"]}</Link>
-        t[i]["deletar"] =<Link className="btn btn-outline-danger" to={`/profile/educacao/deletar-turma/${props[i]["_id"]}`}>Deletar</Link>
+        t.push(props[i])
+        t[i]["nome"] = props[i]["nome"]
+        t[i]["detalhes"] = <Link to={`/profile/educacao/detalhes-turma/${props[i]["_id"]}`}>Detalhes</Link>
     }
     return t;
 }

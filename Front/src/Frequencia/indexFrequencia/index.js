@@ -40,7 +40,6 @@ class IndexTurmaAluno extends Component {
 
 function filtro(rows) {
     let t = rows.map((f) => {
-
         let updateFrequencia = {
             pathname: `/profile/educacao/update-frequencia`,
             state: {

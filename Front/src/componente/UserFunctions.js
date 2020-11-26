@@ -1,9 +1,9 @@
-import axios from 'axios'
 
+import api from '../service/service'
 
 export const register = newUser => {
-  return axios
-    .post('http://localhost:3003/sistema/user', {
+  return api
+    .post('/user', {
       nome: newUser.nome,
       email: newUser.email,
       password: newUser.password
@@ -16,8 +16,8 @@ export const register = newUser => {
 }
 
 export const login = user => {
-  return axios
-    .post('http://localhost:3003/sistema/userLogin', {
+  return api
+    .post('/userLogin', {
       email: user.email,
       password: user.password
     })
@@ -31,8 +31,8 @@ export const login = user => {
 }
 
 export const getProfile = user => {
-  return axios
-    .get('http://localhost:3003/sistema/user', {
+  return api
+    .get('/user', {
    /* headers: { Authorization: ` ${this.getToken()}` }*/
     })
     .then(response => {

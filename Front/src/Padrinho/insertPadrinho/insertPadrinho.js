@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
+import { API_ADDRESS } from '../../service/service';
 import './insert.css';
 
 class CriaPadrinho extends Component {
@@ -191,7 +192,7 @@ class CriaPadrinho extends Component {
 
     //metodo para salvar os dados
     handleSubmit = event => {
-        fetch("http://localhost:3003/sistema/Padrinho", {
+        fetch(`${API_ADDRESS}/Padrinho`, {
             method: "post",
             body: JSON.stringify(this.state.Padrinho),
             headers: {

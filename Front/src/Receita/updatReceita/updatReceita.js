@@ -1,196 +1,100 @@
 import React, { Component } from 'react';
 import './update.css';
 import { Redirect } from "react-router-dom";
-import api from '../../service/service';
+import api, { API_ADDRESS } from '../../service/service';
 
 class EditarReceita extends Component {
     constructor(props) {
         super(props);
 
-
         this.state = {
             Receita: {
-                nome: "",
-                dataNascimento: Date,
-                cnpj: "",
-                estado: "",
-               cep: 0,
-                rua: "",
-                numero: "",
-                bairro: "",
-                celular: "",
-                email: ""
+                receita: "",
+                descricao: "",
+                data: "",
+                valor: 0
             },
             redirect: false,
         }
     }
 
     //metodos que executa junto com a aplicação
-    async componentDidMount() {
+    async componentDidMount () {
         const { id } = this.props.match.params; //buscar parametros
         const response = await api.get(`/Receita/${id}`); //busca do registro
         this.setState({ Receita: response.data });  // atualizando estado com dados do registro 
     }
 
-
-    render() {
-        const { redirect } = this.state;
+    render () {
+        const { Receita, redirect } = this.state;
         if (redirect) {
-            return <Redirect to="/" />
+            return <Redirect to="../lista" />
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
-                <fieldset>
-                <legend>Criar Receita</legend>
-                    <div className="card textForm">
-                        <h3 align="center">Dados Pessoais</h3>
-                        <div className="card-body">
+                    <fieldset>
+                        <legend align="center">Atualizar Receita</legend>
+                        <div className="card textForm">
+                            <h3 align="center">Receita</h3>
+                            <div className="card-body">
+                                <div className="form-row">
+                                    <div className="form-group col-sm-4">
+                                        <label htmlFor="receita">Receita</label>
+                                        <select
+                                            className="form-control config-input"
+                                            type="text"
+                                            id="receita"
+                                            name="receita"
+                                            onChange={this.handleInputChange}
+                                            value={Receita.receita}>
+                                            <option></option>
+                                            <option>options 1</option>
+                                            <option>options 2</option>
+                                            <option>options 3</option>
+                                        </select>
+                                    </div>
+                                    <div className="form-group col-sm-3">
+                                        <label htmlFor="valor">Valor</label>
+                                        <input
+                                            className="form-control config-input"
+                                            type="Number"
+                                            id="valor"
+                                            name="valor"
+                                            onChange={this.handleInputChange}
+                                            value={Receita.valor} />
+                                    </div>
 
-                            <div className="form-row">
-                                <div className="form-group col-sm-7">
-                                <label htmlFor="nome">Nome</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="nome"
-                                        name="nome"
-                                        
-                                        value={this.state.Receita.nome}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                <div className="form-group col-sm-5">
-                                <label  htmlFor="dataNascimento">Data Nascimento:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="Date"
-                                        id="dataNascimento"
-                                        name="dataNascimento"
-                                       
-                                        value={this.state.Receita.dataNascimento}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                </div>
-                               
-                            <h3 align="center">Endereço</h3>
-
-                            <div className="form-row">
-                               <div className="form-group col-sm-3">
-                                <label  htmlFor="rua">Rua:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="rua"
-                                        name="rua"
-                                       
-                                        value={this.state.Receita.rua}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                <div className="form-group col-sm-2">
-                                <label htmlFor="numero">Numero:</label>
-                                    <select
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="numero"
-                                        name="numero"
-                                       
-                                        value={this.state.Receita.numero}
-                                        onChange={this.handleInputChange}>
-                                        <option></option>
-                                        <option>Negro</option>
-                                        <option>Branco</option>
-                                        <option>Parda</option>
-                                        <option>Preto</option>
-                                    </select>
-                                </div>
-                                <div className="form-group col-sm-3">
-                                <label  htmlFor="bairro">Bairro:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="bairro"
-                                        name="bairro"
-                                       
-                                        value={this.state.Receita.bairro}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </div>
-                                <div className="form-group col-sm-4">
-                                <label htmlFor="estado">CNPJ:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="estado"
-                                        name="estado"
-                                       
-                                        value={this.state.Receita.estado}
-                                        onChange={this.handleInputChange}
-                                    />
+                                    <div className="form-group col-sm-6">
+                                        <label htmlFor="descricao">descricao:</label>
+                                        <textarea
+                                            row="3"
+                                            className="form-control config-input"
+                                            type="text"
+                                            id="descricao"
+                                            name="descricao"
+                                            onChange={this.handleInputChange}
+                                            value={Receita.descricao} />
+                                    </div>
+                                    <div className="form-group col-sm-3">
+                                        <label htmlFor="data">data:</label>
+                                        <input
+                                            className="form-control config-input"
+                                            type="Date"
+                                            id="data"
+                                            name="data"
+                                            value={Receita.data.substring(0,10)}
+                                            onChange={this.handleInputChange} />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="form-row">
-                                <div className="form-group col-sm-3">
-                                  <label  htmlFor="cep">Cep:</label>
-                                     <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="cep"
-                                        name="cep"
-                                       
-                                        value={this.state.Receita.cep}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                            
+                            <div className="card-bottom">
+                            <button type='submit' className="btn-success btn-lg float-right mr-2 mb-2">Atualizar</button>
 
-
-                                
-                                <div className="form-group col-sm-3">
-                                <label htmlFor="celular">Celular:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="celular"
-                                        name="celular"
-                                        value={this.state.Receita.celular}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                              
-                                <div className="form-group col-sm-6">
-                                <label htmlFor="email">Email:</label>
-                                    <textarea
-                                    rows=""
-                                        className="form-control"
-                                        type="text"
-                                        id="email"
-                                        name="email"
-                                       
-                                        value={this.state.Receita.email}
-                                        onChange={this.handleInputChange} />
                             </div>
-                            <div className="form-group col-sm-6">
-                                <label htmlFor="estado">Estado:</label>
-                                    <textarea
-                                    rows=""
-                                        className="form-control"
-                                        type="text"
-                                        id="estado"
-                                        name="estado"
-                                       
-                                        value={this.state.Receita.estado}
-                                        onChange={this.handleInputChange} />
-                            </div>
-                            
-                        
                         </div>
-                        <button type="submit" className="btn btn-primary btn-lg float-right">Cadastrar</button>
-                        </div>
-                      
-                        </div>
-
-
-                
-                </fieldset>
-            </form>
-            )
+                    </fieldset>
+                </form>
+            );
         }
     }
 
@@ -201,22 +105,22 @@ class EditarReceita extends Component {
         const value = target.value;   //pega o valor do camo atravez do target
 
         this.setState(prevState => ({
-            Receita: {...prevState.Receita, [name]: value } //atualizando o estado do campo com o value
+            Receita: { ...prevState.Receita, [name]: value } //atualizando o estado do campo com o value
         }));
 
     };
 
     //metodo para salvar os dados
     handleSubmit = event => {
-        const {id} = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/Receita/${id}`, 
+        const { id } = this.props.match.params;
+        fetch(`${API_ADDRESS}/Receita/${id}`,
             {
-            method: "put",
-            body: JSON.stringify(this.state.Receita),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+                method: "put",
+                body: JSON.stringify(this.state.Receita),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
             .then(data => {     //vereficar os dados
                 if (data.ok) {
                     this.setState({ redirect: true });
@@ -224,9 +128,6 @@ class EditarReceita extends Component {
             })
         event.preventDefault();
     }
-
-
-
 }
 
 export default EditarReceita;

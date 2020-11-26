@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './update.css';
 import { Redirect } from "react-router-dom";
-import { api, STATIC_SERVER_ADDRESS } from '../../service/service'
+import { api, API_ADDRESS, STATIC_SERVER_ADDRESS } from '../../service/service'
 
 
 class EditarPA extends Component {
@@ -495,7 +495,7 @@ class EditarPA extends Component {
         formDataObj.append('arquivoFoto', this.state.arquivoFoto)
 
 
-        fetch(`http://localhost:3003/sistema/CadastroPublico/${id}`, {
+        fetch(`${API_ADDRESS}/CadastroPublico/${id}`, {
             method: "put",
             body: formDataObj,
         })

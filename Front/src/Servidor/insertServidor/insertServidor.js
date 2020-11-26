@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import './insert.css';
-import {STATIC_SERVER_ADDRESS} from '../../service/service'
+import {API_ADDRESS, STATIC_SERVER_ADDRESS} from '../../service/service'
 
 class CriaServidor extends Component {
     constructor() {
@@ -434,7 +434,7 @@ class CriaServidor extends Component {
         formDataObj.append('arquivoFoto', this.state.arquivoFoto)
 
 
-        fetch("http://localhost:3003/sistema/Servidor", {
+        fetch(`${API_ADDRESS}/Servidor`, {
             method: "post",
             body: formDataObj,
         }).then(data => {     //vereficar os dados

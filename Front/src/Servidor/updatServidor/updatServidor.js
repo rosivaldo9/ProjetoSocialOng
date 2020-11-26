@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './update.css';
 import { Redirect } from "react-router-dom";
-import {api, STATIC_SERVER_ADDRESS } from '../../service/service'
+import { api, API_ADDRESS, STATIC_SERVER_ADDRESS } from '../../service/service'
 
 class EditarServidor extends Component {
     constructor(props) {
@@ -15,10 +15,10 @@ class EditarServidor extends Component {
                 dataNascimento: Date,
                 sexo: "",
                 raca: "",
-               titulo: 0,
-               secao: 0,
-               zona: "",
-               resevista: "",
+                titulo: 0,
+                secao: 0,
+                zona: "",
+                resevista: "",
                 naturalidade: "",
                 rg: 0,
                 ssp: "",
@@ -27,9 +27,9 @@ class EditarServidor extends Component {
                 estado: "",
                 pai: "",
                 mae: "",
-               estadoCivil: "",
-               grauInstrucao: "",
-               funcao: "",
+                estadoCivil: "",
+                grauInstrucao: "",
+                funcao: "",
                 rua: "",
                 numero: "",
                 bairro: "",
@@ -44,31 +44,31 @@ class EditarServidor extends Component {
     }
 
     //metodos que executa junto com a aplicação
-    async componentDidMount() {
+    async componentDidMount () {
         const { id } = this.props.match.params; //buscar parametros
         const response = await api.get(`/Servidor/${id}`); //busca do registro
         let servidor = response.data
 
-        this.setState({ 
-            Servidor: response.data, 
+        this.setState({
+            Servidor: response.data,
             fotoPreview: STATIC_SERVER_ADDRESS + servidor.foto
         });  // atualizando estado com dados do registro 
     }
 
 
-    render() {
+    render () {
         const { redirect } = this.state;
         if (redirect) {
             return <Redirect to="/" />
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
-                <fieldset>
-                <legend>Criar Servidor</legend>
+                    <fieldset>
+                        <legend>Criar Servidor</legend>
                         <div className="card textForm">
                             <h3 align="center">Dados Pessoais</h3>
                             <div className="card-body">
-                            <div className="container col-md-4 col-sm-4 float-right">
+                                <div className="container col-md-4 col-sm-4 float-right">
                                     <img className="d-flex justify-content-center mx-auto" id="img" src={this.state.fotoPreview} width="170" height="250" />
                                     <label className="d-flex justify-content-center mx-auto" id="foto-upload-label" for="foto-upload">
                                         Selecione um arquivo
@@ -77,100 +77,100 @@ class EditarServidor extends Component {
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-sm-5">
-                                    <label htmlFor="nome">Nome</label>
+                                        <label htmlFor="nome">Nome</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="nome"
                                             name="nome"
-                                            
+
                                             value={this.state.Servidor.nome}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-4">
-                                    <label  htmlFor="dataNascimento">Data Nascimento:</label>
+                                        <label htmlFor="dataNascimento">Data Nascimento:</label>
                                         <input
                                             className="form-control config-input"
                                             type="Date"
                                             id="dataNascimento"
                                             name="dataNascimento"
-                                           
+
                                             value={this.state.Servidor.dataNascimento}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label  htmlFor="sexo">Sexo:</label>
+                                        <label htmlFor="sexo">Sexo:</label>
                                         <select
                                             className="form-control config-input"
                                             type="text"
                                             id="sexo"
                                             name="sexo"
-                                           
+
                                             value={this.state.Servidor.sexo}
                                             onChange={this.handleInputChange}>
                                             <option></option>
                                             <option>Masculino</option>
                                             <option>Femenino</option>
                                         </select>
-                                        </div>                                 
-                                    
+                                    </div>
+
                                     <div className="form-group col-sm-4">
-                                    <label  htmlFor="ssp">SSP:</label> 
+                                        <label htmlFor="ssp">SSP:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="ssp"
                                             name="ssp"
-                                           
+
                                             value={this.state.Servidor.ssp}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-4">
-                                    <label  htmlFor="rg">RG:</label>
+                                        <label htmlFor="rg">RG:</label>
                                         <input
                                             className="form-control config-input"
                                             type="number"
                                             id="rg"
                                             name="rg"
-                                           
+
                                             value={this.state.Servidor.rg}
                                             onChange={this.handleInputChange}
                                         />
                                     </div>
                                     <div className="form-group col-sm-4">
-                                    <label htmlFor="cpf">CPF:</label>
+                                        <label htmlFor="cpf">CPF:</label>
                                         <input
                                             className="form-control config-input"
                                             type="number"
                                             id="cpf"
                                             name="cpf"
-                                           
+
                                             value={this.state.Servidor.cpf}
                                             onChange={this.handleInputChange} />
-                                    
-                                </div>
-                                   
+
+                                    </div>
+
                                     <div className="form-group col-sm-3">
-                                    <label htmlFor="dataExpedicao">Data de Expedição:</label>
-                                    
+                                        <label htmlFor="dataExpedicao">Data de Expedição:</label>
+
                                         <input
                                             className="form-control config-input"
                                             type="date"
                                             id="dataExpedicao"
                                             name="dataExpedicao"
-                                           
+
                                             value={this.state.Servidor.dataExpedicao}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label  htmlFor="raca">Raça:</label>
-                                
+                                        <label htmlFor="raca">Raça:</label>
+
                                         <select
                                             className="form-control config-input"
                                             type="text"
                                             id="raca"
                                             name="raca"
-                                           
+
                                             value={this.state.Servidor.raca}
                                             onChange={this.handleInputChange}>
                                             <option></option>
@@ -179,66 +179,66 @@ class EditarServidor extends Component {
                                             <option>Parda</option>
                                             <option>Preto</option>
                                         </select>
-                                    </div>                                    
+                                    </div>
                                     <div className="form-group col-sm-3">
-                                    <label  htmlFor="titulo">titulo:</label>
+                                        <label htmlFor="titulo">titulo:</label>
                                         <input
                                             className="form-control config-input"
                                             type="number"
                                             id="titulo"
                                             name="titulo"
-                                           
+
                                             value={this.state.Servidor.altura}
                                             onChange={this.handleInputChange}
                                         />
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label htmlFor="naturalidade">Naturalidade:</label>
+                                        <label htmlFor="naturalidade">Naturalidade:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="naturalidade"
                                             name="naturalidade"
-                                           
+
                                             value={this.state.Servidor.naturalidade}
                                             onChange={this.handleInputChange}
                                         />
-                                </div>
+                                    </div>
                                 </div>
 
                                 <h3 align="center">Escolaridade</h3>
 
                                 <div className="form-row">
-                                   <div className="form-group col-sm-5">
-                                    <label  htmlFor="secao">secao:</label>
+                                    <div className="form-group col-sm-5">
+                                        <label htmlFor="secao">secao:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="secao"
                                             name="secao"
-                                           
+
                                             value={this.state.Servidor.secao}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label  htmlFor="zona">Zona:</label>
+                                        <label htmlFor="zona">Zona:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="zona"
                                             name="zona"
-                                           
+
                                             value={this.state.Servidor.zona}
-                                            onChange={this.handleInputChange}/>
+                                            onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-4">
-                                    <label  htmlFor="resevista">Resevista:</label>
+                                        <label htmlFor="resevista">Resevista:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="resevista"
                                             name="resevista"
-                                           
+
                                             value={this.state.Servidor.resevista}
                                             onChange={this.handleInputChange}
                                         />
@@ -247,48 +247,48 @@ class EditarServidor extends Component {
                                 <h3 align="center">Endereço</h3>
 
                                 <div className="form-row">
-                                   <div className="form-group col-sm-3">
-                                    <label  htmlFor="rua">Rua:</label>
+                                    <div className="form-group col-sm-3">
+                                        <label htmlFor="rua">Rua:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="rua"
                                             name="rua"
-                                           
+
                                             value={this.state.Servidor.rua}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-2">
-                                    <label htmlFor="numero">Numero:</label>
+                                        <label htmlFor="numero">Numero:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="numero"
                                             name="numero"
-                                           
+
                                             value={this.state.Servidor.numero}
-                                            onChange={this.handleInputChange}/>
+                                            onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label  htmlFor="bairro">Bairro:</label>
+                                        <label htmlFor="bairro">Bairro:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="bairro"
                                             name="bairro"
-                                           
+
                                             value={this.state.Servidor.bairro}
                                             onChange={this.handleInputChange}
                                         />
                                     </div>
                                     <div className="form-group col-sm-4">
-                                    <label htmlFor="estado">Estado:</label>
+                                        <label htmlFor="estado">Estado:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="estado"
                                             name="estado"
-                                           
+
                                             value={this.state.Servidor.estado}
                                             onChange={this.handleInputChange}
                                         />
@@ -298,49 +298,49 @@ class EditarServidor extends Component {
 
                                 <div className="form-row">
                                     <div className="form-group col-sm-5">
-                                    <label htmlFor="pai">Pai:</label>
+                                        <label htmlFor="pai">Pai:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="pai"
                                             name="pai"
-                                           
+
                                             value={this.state.Servidor.pai}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label htmlFor="mae">Mãe:</label>
+                                        <label htmlFor="mae">Mãe:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="mae"
                                             name="mae"
-                                           
+
                                             value={this.state.Servidor.mae}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-4">
-                                    <label htmlFor="funcao">Função:</label>
+                                        <label htmlFor="funcao">Função:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="funcao"
                                             name="funcao"
-                                           
+
                                             value={this.state.Servidor.funcao}
-                                            onChange={this.handleInputChange}/>
-                                            
+                                            onChange={this.handleInputChange} />
+
                                     </div>
-                               
-                                
+
+
                                     <div className="form-group col-sm-4">
-                                    <label  htmlFor="estadoCivil">Estado Civil:</label>
+                                        <label htmlFor="estadoCivil">Estado Civil:</label>
                                         <select
                                             className="form-control config-input"
                                             type="text"
                                             id="estadoCivil"
                                             name="estadoCivil"
-                                           
+
                                             value={this.state.Servidor.estadoCivil}
                                             onChange={this.handleInputChange} >
                                             <option></option>
@@ -349,30 +349,30 @@ class EditarServidor extends Component {
                                         </select>
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label  htmlFor="grauInstrucao">Grau de Intrução:</label>
+                                        <label htmlFor="grauInstrucao">Grau de Intrução:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="grauInstrucao"
                                             name="grauInstrucao"
-                                           
+
                                             value={this.state.Servidor.grauInstrucao}
                                             onChange={this.handleInputChange}
                                         />
                                     </div>
                                     <div className="form-group col-sm-2">
-                                    <label htmlFor="cursoHabilitacao">Curso Habilitacão:</label>
+                                        <label htmlFor="cursoHabilitacao">Curso Habilitacão:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
                                             id="cursoHabilitacao"
                                             name="cursoHabilitacao"
-                                           
+
                                             value={this.state.Servidor.cursoHabilitacao}
-                                            onChange={this.handleInputChange}/>
+                                            onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3">
-                                    <label htmlFor="celular">Celular:</label>
+                                        <label htmlFor="celular">Celular:</label>
                                         <input
                                             className="form-control config-input"
                                             type="text"
@@ -381,27 +381,27 @@ class EditarServidor extends Component {
                                             value={this.state.Servidor.celular}
                                             onChange={this.handleInputChange} />
                                     </div>
-                                  
+
                                     <div className="form-group col-sm-6">
-                                    <label htmlFor="email">Email:</label>
+                                        <label htmlFor="email">Email:</label>
                                         <input
-                                       
+
                                             className="form-control"
                                             type="text"
                                             id="email"
                                             name="email"
-                                           
+
                                             value={this.state.Servidor.email}
                                             onChange={this.handleInputChange} />
+                                    </div>
                                 </div>
-                            </div>
-                            <button type="submit" className="btn btn-primary btn-lg float-right">Atualizar</button>
-                            </div>
-                          
+                                <button type="submit" className="btn btn-primary btn-lg float-right">Atualizar</button>
                             </div>
 
-                </fieldset>
-            </form>
+                        </div>
+
+                    </fieldset>
+                </form>
             )
         }
     }
@@ -427,13 +427,13 @@ class EditarServidor extends Component {
         const value = target.value;   //pega o valor do camo atravez do target
 
         this.setState(prevState => ({
-            Servidor: {...prevState.Servidor, [name]: value } //atualizando o estado do campo com o value
+            Servidor: { ...prevState.Servidor, [name]: value } //atualizando o estado do campo com o value
         }));
 
     };
 
-     //metodo para salvar os dados
-     handleSubmit = event => {
+    //metodo para salvar os dados
+    handleSubmit = event => {
         event.preventDefault();
         const { id } = this.props.match.params;
 
@@ -445,7 +445,7 @@ class EditarServidor extends Component {
         formDataObj.append('arquivoFoto', this.state.arquivoFoto)
 
 
-        fetch(`http://localhost:3003/sistema/Servidor/${id}`, {
+        fetch(`${API_ADDRESS}/Servidor/${id}`, {
             method: "put",
             body: formDataObj,
         })
@@ -455,9 +455,6 @@ class EditarServidor extends Component {
                 }
             })
     }
-
-
-
 }
 
 export default EditarServidor;

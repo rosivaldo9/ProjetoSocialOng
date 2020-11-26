@@ -1,9 +1,7 @@
 import React from 'react';
 import { Pie } from 'react-chartjs-2';
-import axios from 'axios';
-
+import api from '../service/service'
 /*
-
 
  const lista = async () => {
   return await axios.get('http://localhost:3003/sistema/ListaPublicoMasculino')
@@ -55,7 +53,7 @@ export default class App extends React.Component {
   }
 
   loadPadrinho = async () => {
-    const response = await axios.get('http://localhost:3003/sistema/ListaPublicoMasculino'); //buscar dos dados no banco
+    const response = await api.get('/ListaPublicoMasculino'); //buscar dos dados no banco
     this.setState({ Padrinho: response.data }); // setando o estado de Pu.At. com informações da lista do banco 
 
   }

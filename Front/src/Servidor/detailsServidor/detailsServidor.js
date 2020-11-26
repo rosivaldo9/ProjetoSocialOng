@@ -263,15 +263,11 @@ export default class DetailsServidor extends Component {
                                         value={Servidor.estadoCivil} />
                                 </div>
 
-
                             </div>
-                            <Link to={`/page10/${Servidor._id}`}><button type="button" className="btn btn-warning btn-lg">Editar</button></Link>
-                            <Link to={`/page11/${Servidor._id}`}> <button type="button" className="btn btn-info btn-lg">Deletar</button></Link>
+                            <Link to={`/profile/servidor/editar/${Servidor._id}`} className="btn btn-warning btn-lg mr-2">Editar</Link>
+                            <Link to={`/profile/servidor/remover/${Servidor._id}`} className="btn btn-danger btn-lg">Remover</Link>
                         </div>
-
                     </div>
-
-
                 </fieldset>
             </form>
         );

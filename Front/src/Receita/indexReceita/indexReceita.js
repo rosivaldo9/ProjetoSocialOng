@@ -4,7 +4,7 @@ import api from '../../service/service';//import url base
 import { Link } from 'react-router-dom';
 import Data from './data';
 
-export default class indexreceita extends Component {
+export default class IndexReceita extends Component {
 
     state = {
         Receita: [], //dados da tabela
@@ -32,26 +32,16 @@ export default class indexreceita extends Component {
 
 function filtro(props) {
 
-
-
  var t = []
    for(var i =0; i<props.length; i++){
     t.push(props[i]);
-    t[i]["detalhes"]= <Link to={`/page28/${props[i]["_id"]}`}>Detalhes</Link>
-    t[i]["dataa"] = <Moment  format="DD/MM/YYYY" date={props[i]["data"]}></Moment>
+    t[i]["detalhes"]= <Link to={`/profile/receita/detalhes/${props[i]["_id"]}`}>Detalhes</Link>
+    t[i]["dataa"] = <Moment utc='GMT-3' format="DD/MM/YYYY" date={props[i]["data"]}></Moment>
     t[i]["valorr"] = props[i]["valor"]+"  R$ ";
 
 }
-
-
-   
    return t;
 }
-
-
-
-
-
 
 function btn(props){
     var t=[];

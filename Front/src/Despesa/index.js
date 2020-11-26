@@ -7,8 +7,6 @@ import Editar from '../Despesa/updatDespesa/updatDespesa';
 import Deletar from '../Despesa/deleteDespesa/deleteDespesa';
 import Relatorio from "../Despesa/relatorioDespesa";
 
-
-
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 export default class index extends Component {
@@ -22,12 +20,12 @@ export default class index extends Component {
 
           <section>
             <Switch>
-              <Route path="/page26" component={Insert} />
-              <Route path="/page27" component={Lista} />
-              <Route path="/page28/:id" component={Detalhes} />
-              <Route path="/page29/:id" component={Editar} />
-              <Route path="/page30/:id" component={Deletar} />
-              <Route path="/page20" component={Relatorio}/>
+              <Route path="/profile/despesa/cadastro" component={Insert} />
+              <Route path="/profile/despesa/lista" component={Lista} />
+              <Route path="/profile/despesa/detalhes/:id" component={Detalhes} />
+              <Route path="/profile/despesa/editar/:id" component={Editar} />
+              <Route path="/profile/despesa/remover/:id" component={Deletar} />
+              <Route path="/profile/despesa/relatorios" component={Relatorio}/>
             </Switch>
           </section>
         </Router>

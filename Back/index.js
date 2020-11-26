@@ -7,7 +7,7 @@ const path = require('path')
 
 const app = express();//gerenciador de rotas
 app.use(express.json());//gerenciando rotas em formato Json
-app.use(bodyParser.urlencoded({extended: true}));//configurado para analisar dados no formato json da url
+app.use(bodyParser.urlencoded({ extended: true }));//configurado para analisar dados no formato json da url
 app.use(bodyParser.json())//configurado para analisar dados no formato json
 app.use(cors());
 
@@ -16,16 +16,19 @@ app.use('/assets', express.static(path.join(__dirname, 'src/assets')))
 
 
 
-    //conexão com banco de dados
-mongoose.connect("mongodb+srv://dbJoao:ecmascript@ongdb.gfubd.mongodb.net/ongdb?retryWrites=true&w=majority", {useNewUrlParser:true, useUnifiedTopology: true, useFindAndModify: false});
+//conexão com banco de dados
+mongoose.connect("mongodb+srv://dbJoao:ecmascript@cluster0.gfubd.mongodb.net/dbong?retryWrites=true&w=majority", { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false });
 
 
 //centraliza os models nessa pasta
-    requireDir('./src/models');
-   
+requireDir('./src/models');
+
 
 //rotas
 app.use('/sistema', require('./src/routes/routes'));
 
 //porta
-app.listen(3003);
+const PORT = process.env.PORT || 8088
+app.listen(PORT, () => {
+    console.log("Server initialized")
+})	

@@ -17,8 +17,8 @@ const DatatablePage = (props) => {
         },
       },
       {
-        label: 'Deletar',
-        field: 'deletar',
+        label: 'Detalhes',
+        field: 'detalhes',
         sort: 'asc',
         width: 200
       },

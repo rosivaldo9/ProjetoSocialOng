@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../service/service';//import url base
+import api, { API_ADDRESS } from '../../service/service';//import url base
 
 
 class UpdateTurma extends Component {
@@ -91,7 +91,7 @@ class UpdateTurma extends Component {
     //Pegando os alunos menos o removido
     let { [alunoId]: alunoRemovido, ...restoDosAlunos } = this.state.AlunosDaTurma
     if (turmaAlunoId !== undefined) {//Se o aluno veio do banco, remove.
-       fetch(`http://localhost:3003/sistema/TurmaAluno/${turmaAlunoId}`, {
+       fetch(`${API_ADDRESS}/TurmaAluno/${turmaAlunoId}`, {
         method: "delete"
       })
         .then(data => {
@@ -140,7 +140,7 @@ class UpdateTurma extends Component {
 
     if (alunosFiltrados.length > 0) {
 
-      fetch(`http://localhost:3003/sistema/TurmaAluno`, {
+      fetch(`${API_ADDRESS}/TurmaAluno`, {
         method: "post",
         body: JSON.stringify(alunosFiltrados),
         headers: {

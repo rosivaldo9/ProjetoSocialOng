@@ -6,8 +6,7 @@ import Detalhes from '../Voluntario/detailsVolutario/detailsVolutario';
 import Editar from '../Voluntario/updatVolutario/updatVolutario';
 import Deletar from '../Voluntario/deleteVolutario/deleteVolutario'
 
-
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 export default class index extends Component {
   render() {
@@ -21,11 +20,11 @@ export default class index extends Component {
 
           <section>
             <Switch>
-              <Route path="/page12" component={Insert} />
-              <Route path="/page17" component={Lista} />
-              <Route path="/page14/:id" component={Detalhes} />
-              <Route path="/page15/:id" component={Editar} />
-              <Route path="/page16/:id" component={Deletar} />
+              <Route path="/profile/voluntario/cadastro" component={Insert} />
+              <Route path="/profile/voluntario/lista" component={Lista} />
+              <Route path="/profile/voluntario/detalhes/:id" component={Detalhes} />
+              <Route path="/profile/voluntario/editar/:id" component={Editar} />
+              <Route path="/profile/voluntario/remover/:id" component={Deletar} />
             </Switch>
           </section>
         </Router>

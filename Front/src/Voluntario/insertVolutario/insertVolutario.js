@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
+import { API_ADDRESS } from '../../service/service';
 import './insert.css';
 
 class CriaUsuario extends Component {
@@ -37,7 +38,7 @@ class CriaUsuario extends Component {
             redirect: false,
         }
     }
-    render() {
+    render () {
         const { redirect } = this.state;
         if (redirect) {
             return <Redirect to="/" />
@@ -376,17 +377,9 @@ class CriaUsuario extends Component {
                                             onChange={this.handleInputChange} />
                                     </div>
                                 </div>
-
-
-
-                            
-                            <button type="submit" className="btn btn-primary btn-lg float-right">Cadastrar</button>
+                                <button type="submit" className="btn btn-primary btn-lg float-right">Cadastrar</button>
                             </div>
-                          
-                            </div>
-
-
-                    
+                        </div>
                     </fieldset>
                 </form>
             )
@@ -407,7 +400,7 @@ class CriaUsuario extends Component {
 
     //metodo para salvar os dados
     handleSubmit = event => {
-        fetch("http://localhost:3003/sistema/Voluntario", {
+        fetch(`${API_ADDRESS}/Voluntario`, {
             method: "post",
             body: JSON.stringify(this.state.Voluntario),
             headers: {

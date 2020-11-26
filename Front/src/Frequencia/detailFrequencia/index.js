@@ -40,7 +40,8 @@ class DetailFrequencia extends Component {
                       <b className="text-capitalize">{frequencia.aluno.nome}</b>
                     </td>
                     <td className="text-center">
-                      {frequencia.presente ? "sim" : "não"}
+                      {frequencia.presente ? 
+                      <p className='badge badge-info'>sim</p> :  <p className='badge badge-danger'>não</p> }
                     </td>
                   </tr>
                 ))}

@@ -1,25 +1,17 @@
 import React, { Component } from 'react';
 import './update.css';
 import { Redirect } from "react-router-dom";
-import api from '../../service/service';
+import api, { API_ADDRESS } from '../../service/service';
 
 class EditarDespesa extends Component {
     constructor(props) {
         super(props);
-
-
         this.state = {
-            Padrinho: {
-                nome: "",
-                dataNascimento: Date,
-                cnpj: "",
-                estado: "",
-               cep: 0,
-                rua: "",
-                numero: "",
-                bairro: "",
-                celular: "",
-                email: ""
+            Despesa: {
+                despesa: "",
+                descricao: "",
+                data: "",
+                valor: 0
             },
             redirect: false,
         }
@@ -28,166 +20,75 @@ class EditarDespesa extends Component {
     //metodos que executa junto com a aplicação
     async componentDidMount() {
         const { id } = this.props.match.params; //buscar parametros
-        const response = await api.get(`/Padrinho/${id}`); //busca do registro
-        this.setState({ Padrinho: response.data });  // atualizando estado com dados do registro 
+        const response = await api.get(`/Despesa/${id}`); //busca do registro
+        this.setState({ Despesa: response.data });  // atualizando estado com dados do registro 
     }
 
 
     render() {
-        const { redirect } = this.state;
+        const {Despesa, redirect } = this.state;
         if (redirect) {
-            return <Redirect to="/" />
+            return <Redirect to="../lista" />
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
                 <fieldset>
-                <legend>Criar Padrinho</legend>
+                    <legend align="center">Atualizar Despesa</legend>
                     <div className="card textForm">
-                        <h3 align="center">Dados Pessoais</h3>
+                        <h3 align="center">Despesa</h3>
                         <div className="card-body">
-
                             <div className="form-row">
-                                <div className="form-group col-sm-7">
-                                <label htmlFor="nome">Nome</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="nome"
-                                        name="nome"
-                                        
-                                        value={this.state.Padrinho.nome}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                <div className="form-group col-sm-5">
-                                <label  htmlFor="dataNascimento">Data Nascimento:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="Date"
-                                        id="dataNascimento"
-                                        name="dataNascimento"
-                                       
-                                        value={this.state.Padrinho.dataNascimento}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                </div>
-                               
-                            <h3 align="center">Endereço</h3>
-
-                            <div className="form-row">
-                               <div className="form-group col-sm-3">
-                                <label  htmlFor="rua">Rua:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="rua"
-                                        name="rua"
-                                       
-                                        value={this.state.Padrinho.rua}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                                <div className="form-group col-sm-2">
-                                <label htmlFor="numero">Numero:</label>
+                                <div className="form-group col-sm-4">
+                                    <label htmlFor="despesa">Despesa</label>
                                     <select
                                         className="form-control config-input"
                                         type="text"
-                                        id="numero"
-                                        name="numero"
-                                       
-                                        value={this.state.Padrinho.numero}
-                                        onChange={this.handleInputChange}>
+                                        id="despesa"
+                                        name="despesa"
+                                        onChange={this.handleInputChange}
+                                        value={Despesa.despesa}>
                                         <option></option>
-                                        <option>Negro</option>
-                                        <option>Branco</option>
-                                        <option>Parda</option>
-                                        <option>Preto</option>
+                                        <option>options 1</option>
+                                        <option>options 2</option>
+                                        <option>options 3</option>
                                     </select>
                                 </div>
                                 <div className="form-group col-sm-3">
-                                <label  htmlFor="bairro">Bairro:</label>
+                                    <label htmlFor="valor">Valor</label>
                                     <input
                                         className="form-control config-input"
-                                        type="text"
-                                        id="bairro"
-                                        name="bairro"
-                                       
-                                        value={this.state.Padrinho.bairro}
+                                        type="Number"
+                                        id="valor"
+                                        name="valor"
                                         onChange={this.handleInputChange}
-                                    />
+                                        value={Despesa.valor} />
                                 </div>
-                                <div className="form-group col-sm-4">
-                                <label htmlFor="estado">CNPJ:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="estado"
-                                        name="estado"
-                                       
-                                        value={this.state.Padrinho.estado}
-                                        onChange={this.handleInputChange}
-                                    />
-                                </div>
-                            </div>
-                            <div className="form-row">
-                                <div className="form-group col-sm-3">
-                                  <label  htmlFor="cep">Cep:</label>
-                                     <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="cep"
-                                        name="cep"
-                                       
-                                        value={this.state.Padrinho.cep}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                            
-
-
-                                
-                                <div className="form-group col-sm-3">
-                                <label htmlFor="celular">Celular:</label>
-                                    <input
-                                        className="form-control config-input"
-                                        type="text"
-                                        id="celular"
-                                        name="celular"
-                                        value={this.state.Padrinho.celular}
-                                        onChange={this.handleInputChange} />
-                                </div>
-                              
+    
                                 <div className="form-group col-sm-6">
-                                <label htmlFor="email">Email:</label>
+                                    <label htmlFor="descricao">descricao:</label>
                                     <textarea
-                                    rows=""
-                                        className="form-control"
+                                        row="3"
+                                        className="form-control config-input"
                                         type="text"
-                                        id="email"
-                                        name="email"
-                                       
-                                        value={this.state.Padrinho.email}
-                                        onChange={this.handleInputChange} />
+                                        id="descricao"
+                                        name="descricao"
+                                        onChange={this.handleInputChange}
+                                        value={Despesa.descricao} />
+                                </div>
+                                <div className="form-group col-sm-3">
+                                <label htmlFor="data">data:</label>
+                                <input
+                                    className="form-control config-input"
+                                    type="date"
+                                    id="data"
+                                    name="data"
+                                    value={Despesa.data.substring(0, 10)}
+                                    onChange={this.handleInputChange} />
                             </div>
-                            <div className="form-group col-sm-6">
-                                <label htmlFor="estado">Estado:</label>
-                                    <textarea
-                                    rows=""
-                                        className="form-control"
-                                        type="text"
-                                        id="estado"
-                                        name="estado"
-                                       
-                                        value={this.state.Padrinho.estado}
-                                        onChange={this.handleInputChange} />
                             </div>
-                            
-                        
+                            <button type='submit' className="btn btn-primary btn-lg float-right">Atualizar</button>
                         </div>
-                        <button type="submit" className="btn btn-primary btn-lg float-right">Cadastrar</button>
-                        </div>
-                      
-                        </div>
-
-
-                
+                    </div>
                 </fieldset>
             </form>
             )
@@ -201,7 +102,7 @@ class EditarDespesa extends Component {
         const value = target.value;   //pega o valor do camo atravez do target
 
         this.setState(prevState => ({
-            Padrinho: {...prevState.Padrinho, [name]: value } //atualizando o estado do campo com o value
+            Despesa: {...prevState.Despesa, [name]: value } //atualizando o estado do campo com o value
         }));
 
     };
@@ -209,10 +110,10 @@ class EditarDespesa extends Component {
     //metodo para salvar os dados
     handleSubmit = event => {
         const {id} = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/Padrinho/${id}`, 
+        fetch(`${API_ADDRESS}/Despesa/${id}`, 
             {
             method: "put",
-            body: JSON.stringify(this.state.Padrinho),
+            body: JSON.stringify(this.state.Despesa),
             headers: {
                 "Content-Type": "application/json"
             }
@@ -224,9 +125,6 @@ class EditarDespesa extends Component {
             })
         event.preventDefault();
     }
-
-
-
 }
 
 export default EditarDespesa;

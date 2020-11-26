@@ -7,8 +7,7 @@ import UpdatePA from './updatPA/updatPA';
 import DeletePA from './deletePA/deletePA';
 import Relatorios  from './Relatorios/graficos'
 
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 export default class index extends Component {
   render() {
@@ -22,12 +21,12 @@ export default class index extends Component {
 
           <section>
             <Switch>
-              <Route path="/page2" component={IndexPA} />
-              <Route path="/page3" component={CadastroPA} />
-              <Route path='/detalhes/:id' component={DetailsPA} />
-              <Route path='/page5/:id' component={UpdatePA} />
-              <Route path='/page6/:id' component={DeletePA} />
-              <Route path='/relatorios' component={Relatorios} />
+              <Route path="/profile/publicoatendido/lista" component={IndexPA} />
+              <Route path="/profile/publicoatendido/cadastro" component={CadastroPA} />
+              <Route path='/profile/publicoatendido/detalhes/:id' component={DetailsPA} />
+              <Route path='/profile/publicoatendido/editar/:id' component={UpdatePA} />
+              <Route path='/profile/publicoatendido/remover/:id' component={DeletePA} />
+              <Route path='/profile/publicoatendido/relatorios' component={Relatorios} />
             </Switch>
           </section>
 

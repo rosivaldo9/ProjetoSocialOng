@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import './delete.css';
 import { Redirect, Link } from 'react-router-dom';
-import api from '../../service/service';
+import api, { API_ADDRESS } from '../../service/service';
 
-class DeletePadrinho extends Component{
+class DeletePadrinho extends Component {
     constructor(props) {
         super(props);
 
@@ -13,30 +13,38 @@ class DeletePadrinho extends Component{
         };
     }
 
-    async componentDidMount() {
+    async componentDidMount () {
         const { id } = this.props.match.params;
         const response = await api.get(`/Padrinho/${id}`);
         this.setState({ Padrinho: response.data });
     }
 
-    render() {
-        const { redirect } = this.state;
+    render () {
+        const { Padrinho, redirect } = this.state;
         if (redirect) {
             return <Redirect />
         } else {
             return (
-                <fieldset>
-                    <legend>Deletar usuario</legend>
-                    <div>
-                        <label htmlFor="nome">Nome</label>
-                        <h5>{this.state.Padrinho.nome}</h5>
-                        <p>Tem certeza que deja deletar esse usuario?</p>
-                        <button onClick={this.handleClick}>Remover</button>
+                <div className="container">
+                    <h2 className="text-center">Remover Padrinho</h2>
+                    <div className="row d-flex justify-content-center">
+                        <p className="alert alert-danger">
+                            Tem certeza que deseja remover o padrinho <b>{Padrinho.nome}</b>?
+                        </p>
                     </div>
-                    <br /><br />
-
-                    <Link to="/">Voltar</Link>
-                </fieldset>
+                    <div className="row d-flex justify-content-center">
+                        <button
+                            className="btn btn-outline-danger btn-lg mr-2"
+                            onClick={this.handleClick}>
+                            Remover
+                    </button>
+                        <button
+                            className="btn btn-outline-secondary btn-lg"
+                            onClick={this.props.history.goBack}>
+                            Voltar
+                    </button>
+                    </div>
+                </div >
             )
         }
     }
@@ -44,12 +52,12 @@ class DeletePadrinho extends Component{
 
     handleClick = event => {
         const { id } = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/Padrinho/${id}`, {
+        fetch(`${API_ADDRESS}/Padrinho/${id}`, {
             method: "delete"
         })
             .then(data => {
                 if (data.ok) {
-                    this.setState({ redirect: true});
+                    this.setState({ redirect: true });
                 }
             })
         event.preventDefault();

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import './delete.css';
 import { Redirect, Link } from 'react-router-dom';
-import api from '../../service/service';
+import api, {API_ADDRESS} from '../../service/service';
 
 class DeleteDespesa extends Component{
     constructor(props) {
         super(props);
 
         this.state = {
-            Despesa: {},
+            Despesa: {
+                despesa: ""
+            },
             redirect: false
         };
     }
@@ -20,23 +22,31 @@ class DeleteDespesa extends Component{
     }
 
     render() {
-        const { redirect } = this.state;
+        const { Despesa, redirect } = this.state;
         if (redirect) {
-            return <Redirect to="/profile"/>
+            return <Redirect to="/profile/despesa/lista"/>
         } else {
             return (
-                <fieldset>
-                    <legend>Deletar usuario</legend>
-                    <div>
-                        <label htmlFor="nome">Nome</label>
-                        <h5>{this.state.Despesa.despesa}</h5>
-                        <p>Tem certeza que deja deletar essa Despesa?</p>
-                        <button onClick={this.handleClick}>Remover</button>
-                    </div>
-                    <br /><br />
-
-                    <Link to="/">Voltar</Link>
-                </fieldset>
+                <div className="container">
+                <h2 className="text-center">Remover Despesa</h2>
+                <div className="row d-flex justify-content-center">
+                    <p className="alert alert-danger">
+                        Tem certeza que deseja remover a despesa <b>"{Despesa.despesa}"</b>?
+                    </p>
+                </div>
+                <div className="row d-flex justify-content-center">
+                    <button
+                        className="btn btn-outline-danger btn-lg mr-2"
+                        onClick={this.handleClick}>
+                        Remover
+                </button>
+                    <button
+                        className="btn btn-outline-secondary btn-lg"
+                        onClick={this.props.history.goBack}>
+                        Voltar
+                </button>
+                </div>
+            </div >
             )
         }
     }
@@ -44,7 +54,7 @@ class DeleteDespesa extends Component{
 
     handleClick = event => {
         const { id } = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/Despesa/${id}`, {
+        fetch(`${API_ADDRESS}/Despesa/${id}`, {
             method: "delete"
         })
             .then(data => {

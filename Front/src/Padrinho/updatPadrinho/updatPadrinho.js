@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './update.css';
 import { Redirect } from "react-router-dom";
-import api from '../../service/service';
+import api, { API_ADDRESS } from '../../service/service';
 
 class EditarPadrinho extends Component {
     constructor(props) {
@@ -181,7 +181,7 @@ class EditarPadrinho extends Component {
                             
                         
                         </div>
-                        <button type="submit" className="btn btn-primary btn-lg float-right">Cadastrar</button>
+                        <button type="submit" className="btn btn-primary btn-lg float-right">Atualizar</button>
                         </div>
                       
                         </div>
@@ -209,7 +209,7 @@ class EditarPadrinho extends Component {
     //metodo para salvar os dados
     handleSubmit = event => {
         const {id} = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/Padrinho/${id}`, 
+        fetch(`${API_ADDRESS}/Padrinho/${id}`, 
             {
             method: "put",
             body: JSON.stringify(this.state.Padrinho),

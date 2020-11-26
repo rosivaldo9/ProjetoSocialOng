@@ -3,7 +3,7 @@ import { api, STATIC_SERVER_ADDRESS } from '../../service/service';
 import { Link } from "react-router-dom";
 import '../indexPA/index.css';
 import './detail.css'
-import {setPdfData,printPdf} from './templatePdf'
+import { setPdfData, printPdf } from './templatePdf'
 
 
 export default class PublicoPA extends Component {
@@ -41,20 +41,20 @@ export default class PublicoPA extends Component {
 
     }
 
-    async componentDidMount() {                               //metodo executa no momento da execução da aplicação
+    async componentDidMount () {                               //metodo executa no momento da execução da aplicação
         const { id } = this.props.match.params;                     // pegando o ID da url através do props
         const response = await api.get(`/CadastroPublico/${id}`);  // busca da lista no banco de dados
         this.setState({ publicoAtendido: response.data });         //setando dados do publicoAtendido com dados da lista
         setPdfData(response.data)
     }
 
-    handleClick(){
+    handleClick () {
         printPdf()
     }
 
-    render() {
+    render () {
         const { publicoAtendido } = this.state;  // PublicoAtendido no seu estado atual
-    
+
         return (
 
             <form className="tituloDetails" onSubmit={this.handleSubmit}>
@@ -64,10 +64,10 @@ export default class PublicoPA extends Component {
                         <h3 align="center">Dados Pessoais</h3>
                         <div className="card-body">
                             <div className="container col-md-4 col-sm-4 float-right">
-                                <img className="d-flex justify-content-center mx-auto" 
-                                id="img" src={STATIC_SERVER_ADDRESS + publicoAtendido.foto}
-                                 width="170" height="250" />
-                                
+                                <img className="d-flex justify-content-center mx-auto"
+                                    id="img" src={STATIC_SERVER_ADDRESS + publicoAtendido.foto}
+                                    width="170" height="250" />
+
                             </div>
                             <div className="form-row">
                                 <div className="form-group col-sm-5">
@@ -79,13 +79,13 @@ export default class PublicoPA extends Component {
                                 </div>
                                 <div className="form-group col-sm-4">
                                     <label htmlFor="dataNascimento">Data Nascimento:</label>
-                                   
+
                                     <input
                                         type="date"
                                         className="form-control config-input"
                                         disabled="true"
-                                        value={publicoAtendido.dataNascimento.substring(0,10)}
-                                         />
+                                        value={publicoAtendido.dataNascimento.substring(0, 10)}
+                                    />
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label htmlFor="sexo">Sexo:</label>
@@ -94,7 +94,6 @@ export default class PublicoPA extends Component {
                                         disabled="true"
                                         value={publicoAtendido.sexo} />
                                 </div>
-
                                 <div className="form-group col-sm-4">
                                     <label htmlFor="religiao">Religião:</label>
                                     <input
@@ -115,12 +114,9 @@ export default class PublicoPA extends Component {
                                         className="form-control config-input"
                                         disabled="true"
                                         value={publicoAtendido.cpf} />
-
                                 </div>
-
                                 <div className="form-group col-sm-3">
                                     <label htmlFor="peso">Peso:</label>
-
                                     <input
                                         className="form-control config-input"
                                         disabled="true"
@@ -128,12 +124,10 @@ export default class PublicoPA extends Component {
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label htmlFor="raca">Raça:</label>
-
                                     <input
                                         className="form-control config-input"
                                         disabled="true"
                                         value={publicoAtendido.raca} />
-
                                 </div>
                                 <div className="form-group col-sm-3">
                                     <label htmlFor="altura">Altura:</label>
@@ -152,9 +146,7 @@ export default class PublicoPA extends Component {
                                     />
                                 </div>
                             </div>
-
                             <h3 align="center">Escolaridade</h3>
-
                             <div className="form-row">
                                 <div className="form-group col-sm-5">
                                     <label htmlFor="escola">Escola:</label>
@@ -169,7 +161,6 @@ export default class PublicoPA extends Component {
                                         className="form-control config-input"
                                         disabled="true"
                                         value={publicoAtendido.ano} />
-
                                 </div>
                                 <div className="form-group col-sm-4">
                                     <label htmlFor="anoAnterior">Ano Anterior:</label>
@@ -213,7 +204,6 @@ export default class PublicoPA extends Component {
                                 </div>
                             </div>
                             <h3 align="center">Responsavel</h3>
-
                             <div className="form-row">
                                 <div className="form-group col-sm-5">
                                     <label htmlFor="nomeResponsavel">Nome do Responsavel:</label>
@@ -236,8 +226,6 @@ export default class PublicoPA extends Component {
                                         disabled="true"
                                         value={publicoAtendido.funcao} />
                                 </div>
-
-
                                 <div className="form-group col-sm-4">
                                     <label htmlFor="escolaridade">Escolaridade:</label>
                                     <input
@@ -267,7 +255,6 @@ export default class PublicoPA extends Component {
                                         disabled="true"
                                         value={publicoAtendido.contribuinte} />
                                 </div>
-
                                 <div className="form-group col-sm-6">
                                     <label htmlFor="observacao">Observação:</label>
                                     <textarea
@@ -276,17 +263,12 @@ export default class PublicoPA extends Component {
                                         disabled="true"
                                         value={publicoAtendido.observacao} />
                                 </div>
-
-
                             </div>
                             <button type="button" className="btn btn-info btn-lg" onClick={this.handleClick}>Imprimir</button>
-                            <Link to={`/page5/${publicoAtendido._id}`}><button type="button" className="btn btn-warning btn-lg">Editar</button></Link>
-                            <Link to={`/page6/${publicoAtendido._id}`}><button type="button" className="btn btn-danger btn-lg">Deletar</button></Link>
+                            <Link to={`/profile/publicoatendido/editar/${publicoAtendido._id}`}><button type="button" className="btn btn-warning btn-lg">Editar</button></Link>
+                            <Link to={`/profile/publicoatendido/remover/${publicoAtendido._id}`}><button type="button" className="btn btn-danger btn-lg">Deletar</button></Link>
                         </div>
-
                     </div>
-
-
                 </fieldset>
             </form>
         );

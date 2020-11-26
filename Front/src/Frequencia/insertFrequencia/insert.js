@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../service/service';//import url base
+import api, { API_ADDRESS } from '../../service/service';//import url base
 
 
 class Frequencia extends Component {
@@ -82,7 +82,7 @@ class Frequencia extends Component {
     event.preventDefault();
     const alunosDaTurma = this.state.Frequencia
 
-    fetch(`http://localhost:3003/sistema/Frequencia`, {
+    fetch(`${API_ADDRESS}/Frequencia`, {
       method: "post",
       body: JSON.stringify(alunosDaTurma),
       headers: {

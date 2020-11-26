@@ -5,20 +5,13 @@ import InsertTurma from '../Turma/insertTurma'
 import DeleteTurma from '../Turma/deleteTurma'
 import DetailsTurma from '../Turma/detailsTurma'
 import UpdateTurma from '../Turma/updateTurma/'
-
 import IndexTurmaAluno from '../TurmaAluno/indexTurmaAluno'
 import UpdateTurmaAluno from '../TurmaAluno/updateTurmaAluno'
-
 import IndexFrequencia from '../Frequencia/indexFrequencia'
 import DetalhesFrequencia from '../Frequencia/detailFrequencia'
-
 import CadastroFrequencia from '../Frequencia/insertFrequencia'
 import InsertFrequencia from '../Frequencia/insertFrequencia/insert'
-
 import UpdateFrequencia from '../Frequencia/updateFrequencia'
-
-
-
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
@@ -28,7 +21,6 @@ const Index = () => (
             <header>
                 <Header />
             </header>
-
             <section>
                 <Switch>
                     <Route path='/profile/educacao/adicionar-alunos/' component={IndexTurmaAluno} />

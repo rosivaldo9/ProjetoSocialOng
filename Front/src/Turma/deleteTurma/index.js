@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './delete.css';
 import { Redirect, Link } from 'react-router-dom';
-import api from '../../service/service';
+import api, { API_ADDRESS } from '../../service/service';
 
 class DeleteTurma extends Component {
     constructor() {
@@ -13,11 +13,11 @@ class DeleteTurma extends Component {
         };
     }
 
-    componentDidMount() { 
-      this.loadTurma()
+    componentDidMount () {
+        this.loadTurma()
     }
 
-    async loadTurma(){
+    async loadTurma () {
         const { id } = this.props.match.params;
 
         const response = await api.get(`/Turma/${id}`);
@@ -25,23 +25,25 @@ class DeleteTurma extends Component {
 
     }
 
-    render() {
+    render () {
         const { redirect } = this.state;
-        
+
         if (redirect) {
-            return <Redirect exact from='/profile/educacao/deletar-turma/:id' to='/profile/educacao/turmas'/>
+            return <Redirect exact from='/profile/educacao/deletar-turma/:id' to='/profile/educacao/turmas' />
         } else {
             return (
                 <div className="container">
-                <h2 className="text-center">Remover turma</h2>
-                <p className="alert alert-danger">
-                    Tem certeza que deja remover a turma <b>"{this.state.Turma.nome}"</b>, 
-                    esta ação também removerá os alunos desta turma e sua frequência.
-                </p>
-
-          
-                <button type="button" className="btn btn-outline-danger btn-lg" onClick={this.handleClick}>Remover</button>
-               <Link className="btn btn-outline-secondary btn-lg" to="/profile/educacao/turmas">Voltar</Link>
+                    <h2 className="text-center">Remover turma</h2>
+                    <div className="row d-flex justify-content-center">
+                        <p className="alert alert-danger">
+                            Tem certeza que deseja remover a turma <b>"{this.state.Turma.nome}"</b>,
+                            esta ação também removerá os alunos desta turma e sua frequência.
+                        </p>
+                    </div>
+                    <div className="row d-flex justify-content-center">
+                        <button type="button" className="btn btn-outline-danger btn-lg mr-2" onClick={this.handleClick}>Remover</button>
+                        <Link className="btn btn-outline-secondary btn-lg" to="/profile/educacao/turmas">Voltar</Link>
+                    </div>
                 </div >
             )
         }
@@ -50,7 +52,7 @@ class DeleteTurma extends Component {
 
     handleClick = event => {
         const { id } = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/Turma/${id}`, {
+        fetch(`${API_ADDRESS}/Turma/${id}`, {
             method: "delete"
         })
             .then(data => {

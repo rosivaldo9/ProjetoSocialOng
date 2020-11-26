@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './delete.css';
 import { Redirect, Link } from 'react-router-dom';
-import api from '../../service/service';
+import api, { API_ADDRESS } from '../../service/service';
 
 class DeletePA extends Component {
     constructor(props) {
@@ -45,7 +45,7 @@ class DeletePA extends Component {
 
     handleClick = event => {
         const { id } = this.props.match.params;
-        fetch(`http://localhost:3003/sistema/CadastroPublico/${id}`, {
+        fetch(`${API_ADDRESS}/CadastroPublico/${id}`, {
             method: "delete"
         })
             .then(data => {

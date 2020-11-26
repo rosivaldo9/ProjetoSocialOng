@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import './insert.css';
-import { STATIC_SERVER_ADDRESS } from '../../service/service'
+import { API_ADDRESS, STATIC_SERVER_ADDRESS } from '../../service/service'
 
 class CriaPA extends Component {
     constructor() {
@@ -475,7 +475,7 @@ class CriaPA extends Component {
         formDataObj.append('arquivoFoto', this.state.arquivoFoto)
 
 
-        fetch("http://localhost:3003/sistema/CadastroPublico", {
+        fetch(`${API_ADDRESS}/CadastroPublico`, {
             method: "post",
             body: formDataObj,
         })

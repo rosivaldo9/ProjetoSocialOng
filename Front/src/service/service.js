@@ -1,12 +1,12 @@
 import axios from 'axios';
-const PORT = 3003
+const PORT = process.env.PORT | 8088
+const HOST = process.env.NODE_ENV == 'production'
+    ? 'https://socialong-api.herokuapp.com' : `http://localhost:${PORT}`
 const PATH = 'sistema'
-const API_ADDRESS = `http://localhost:${PORT}/${PATH}`
-export const STATIC_SERVER_ADDRESS = `http://localhost:${PORT}/`
-
-
+export const API_ADDRESS = `${HOST}/${PATH}`
+export const STATIC_SERVER_ADDRESS = `${HOST}/`
 //url base
-export const api = axios.create({baseURL: API_ADDRESS});
+export const api = axios.create({ baseURL: API_ADDRESS });
 
 
 

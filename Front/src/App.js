@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {hot} from 'react-hot-loader';
 import {BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Navbar from './componente/NavBar'
 import Landing from './componente/Landing'
@@ -14,23 +15,19 @@ class App extends Component {
 
   render() {
     return (
-
       <BrowserRouter history={history}>
         <div className="App">
-            
+
             <div>
               <Switch>
             {/* <Route exact path="/" component={Login} /> */}
+            <Route component={Profile} />
             <Route exact path="/register" component={Register} />
             <Route path="/profile" component={Profile} />
             </Switch>
             </div>
-          
         </div>
       </BrowserRouter>
-
-
-
 
 
 /*
@@ -43,4 +40,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default hot(module)(App);

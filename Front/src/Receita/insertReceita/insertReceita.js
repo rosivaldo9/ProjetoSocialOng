@@ -3,8 +3,7 @@ import { Redirect } from "react-router-dom";
 import './insert.css';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import $ from 'jquery';
-
-
+import { API_ADDRESS } from '../../service/service';
 
 class CriaReceita extends Component {
     constructor() {
@@ -15,25 +14,20 @@ class CriaReceita extends Component {
                 receita: "",
                 descricao: "",
                 valor: Number,
-                data: Date
-
+                data: new Date().toISOString().substring(0, 10)
             },
             redirect: false,
         }
     }
-    render() {
+    render () {
         const { redirect } = this.state;
         if (redirect) {
             return (
-                
-            <Redirect to="/page26"/>,
-                <div   className="alert alert-success aler" role="alert">
-          <p>Os dados foram salvo com sucesso</p>
-           </div>
-           
-             
-             )
-            
+                <Redirect to="/page26" />,
+                <div className="alert alert-success aler" role="alert">
+                    <p>Os dados foram salvos com sucesso</p>
+                </div>
+            )
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
@@ -42,7 +36,6 @@ class CriaReceita extends Component {
                         <div className="card textForm">
                             <h3 align="center">Receita</h3>
                             <div className="card-body">
-
                                 <div className="form-row">
                                     <div className="form-group col-sm-4">
                                         <label htmlFor="receita">Receita</label>
@@ -51,8 +44,6 @@ class CriaReceita extends Component {
                                             type="text"
                                             id="receita"
                                             name="receita"
-
-                                            value={this.state.Receita.receita}
                                             onChange={this.handleInputChange} >
                                             <option></option>
                                             <option>options 1</option>
@@ -68,11 +59,8 @@ class CriaReceita extends Component {
                                             id="valor"
                                             name="valor"
                                             required
-
-                                            value={this.state.Receita.valor}
                                             onChange={this.handleInputChange} />
                                     </div>
-
                                     <div className="form-group col-sm-6">
                                         <label htmlFor="descricao">descricao:</label>
                                         <textarea
@@ -82,8 +70,6 @@ class CriaReceita extends Component {
                                             id="descricao"
                                             name="descricao"
                                             required
-
-                                            value={this.state.Receita.descricao}
                                             onChange={this.handleInputChange} />
                                     </div>
                                     <div className="form-group col-sm-3">
@@ -92,25 +78,16 @@ class CriaReceita extends Component {
                                             className="form-control config-input"
                                             type="Date"
                                             id="data"
+                                            defaultValue={this.state.Receita.data}
 
-                                            value={this.state.Receita.data = new Date()}
                                             onChange={this.handleInputChange} />
                                     </div>
-
                                 </div>
-                                <button type="submit" className="btn btn-primary btn-lg float-right" >Cadastrar</button>
-                              
-                                </div>
-
+                                <button type="submit" className="btn btn-outline-primary btn-lg float-right" >Cadastrar</button>
+                            </div>
                         </div>
-
-
                     </fieldset>
-
                 </form>
-
- 
-
             )
         }
     }
@@ -129,7 +106,7 @@ class CriaReceita extends Component {
 
     //metodo para salvar os dados
     handleSubmit = event => {
-        fetch("http://localhost:3003/sistema/Receita", {
+        fetch(`${API_ADDRESS}/Receita`, {
             method: "post",
             body: JSON.stringify(this.state.Receita),
             headers: {

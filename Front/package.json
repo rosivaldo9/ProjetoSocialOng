@@ -13,10 +13,13 @@
     "bootstrap-icons": "^1.0.0-alpha3",
     "datatables.net": "^1.10.21",
     "datatables.net-dt": "^1.10.21",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
     "jquery": "^3.5.1",
     "jwt-decode": "^2.2.0",
     "mdbreact": "^4.27.0",
     "moment": "^2.27.0",
+    "path": "^0.12.7",
     "pdfmake": "^0.1.68",
     "react": "^16.13.1",
     "react-chartjs-2": "^2.10.0",
@@ -50,5 +53,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "react-hot-loader": "^4.13.0"
   }
 }

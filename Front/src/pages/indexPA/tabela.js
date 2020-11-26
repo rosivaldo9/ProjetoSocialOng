@@ -24,7 +24,7 @@ const DatatablePage = (props) => {
       },
 
     ],
-    rows: props.row
+    rows: props.rows
 
   };
 

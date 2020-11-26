@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import api from '../../service/service';//import url base
+import api, { API_ADDRESS } from '../../service/service';//import url base
 
 
 class AtualizarTurma extends Component {
@@ -54,7 +54,7 @@ class AtualizarTurma extends Component {
     handleSubmit = event => {
        const turma = this.state.Turma
 
-        fetch(`http://localhost:3003/sistema/Turma/${turma._id}`, {
+        fetch(`${API_ADDRESS}/Turma/${turma._id}`, {
             method: "put",
             body: JSON.stringify(turma),
             headers: {

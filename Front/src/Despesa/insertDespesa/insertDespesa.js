@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
 import './insert.css';
-import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
-import $ from 'jquery';
-
-
+import { API_ADDRESS } from '../../service/service';
 
 class CriarDespesa extends Component {
     constructor() {
@@ -15,34 +12,29 @@ class CriarDespesa extends Component {
                 despesa: "",
                 descricao: "",
                 valor: 0,
-                data: new Date()
+                data: new Date().toISOString().substring(0, 10)
             },
             redirect: false,
         }
     }
-    render() {
-     
+    render () {
+
         const { redirect } = this.state;
         if (redirect) {
             return (
-                
-            <Redirect to="/page26"/>,
-                <div   className="alert alert-success aler" role="alert">
-          <p>Os dados foram salvo com sucesso</p>
-           </div>
-           
-             
-             )
-            
+                <Redirect to="../lista" />,
+                <div className="alert alert-success aler" role="alert">
+                    <p>Os dados foram salvos com sucesso</p>
+                </div>
+            )
         } else {
             return (
                 <form onSubmit={this.handleSubmit}>
                     <fieldset>
-                        <legend align="center">Enserir Despesa</legend>
+                        <legend align="center">Cadastrar Despesa</legend>
                         <div className="card textForm">
                             <h3 align="center">Despesa</h3>
                             <div className="card-body">
-
                                 <div className="form-row">
                                     <div className="form-group col-sm-4">
                                         <label htmlFor="despesa">Despesa</label>
@@ -52,8 +44,6 @@ class CriarDespesa extends Component {
                                             id="despesa"
                                             name="despesa"
                                             required
-
-                                            value={this.state.Despesa.despesa}
                                             onChange={this.handleInputChange} >
                                             <option></option>
                                             <option>options 1</option>
@@ -69,8 +59,6 @@ class CriarDespesa extends Component {
                                             id="valor"
                                             name="valor"
                                             required
-
-                                            value={this.state.Despesa.valor}
                                             onChange={this.handleInputChange} />
                                     </div>
 
@@ -83,11 +71,9 @@ class CriarDespesa extends Component {
                                             id="descricao"
                                             name="descricao"
                                             required
-
-                                            value={this.state.Despesa.descricao}
                                             onChange={this.handleInputChange} />
                                     </div>
-                                    
+
                                     <div className="form-group col-sm-3">
                                         <label htmlFor="data">data:</label>
                                         <input
@@ -95,24 +81,17 @@ class CriarDespesa extends Component {
                                             type="date"
                                             id="data"
                                             name="data"
-                                            defaultValue={new Date().toISOString().substring(0,10)}
+                                            defaultValue={this.state.Despesa.data}
                                             onChange={this.handleInputChange} />
                                     </div>
 
                                 </div>
                                 <button type="submit" className="btn btn-primary btn-lg float-right" >Cadastrar</button>
-                              
-                                </div>
 
+                            </div>
                         </div>
-
-
                     </fieldset>
-
                 </form>
-
- 
-
             )
         }
     }
@@ -131,7 +110,7 @@ class CriarDespesa extends Component {
 
     //metodo para salvar os dados
     handleSubmit = event => {
-        fetch("http://localhost:3003/sistema/Despesa", {
+        fetch(`${API_ADDRESS}/Despesa`, {
             method: "post",
             body: JSON.stringify(this.state.Despesa),
             headers: {
