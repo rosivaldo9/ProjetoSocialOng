@@ -3,9 +3,6 @@ import api from '../../service/service';
 import { Link } from "react-router-dom";
 import '../indexDespesa/index.css';
 
-
-
-
 export default class DetailsDespesa extends Component {
     state = {
         Despesa: {

@@ -10,23 +10,19 @@ import R from './componente/graficos'
 
 import  {history} from './History'
 
-
 class App extends Component {
 
   render() {
     return (
       <BrowserRouter history={history}>
-        <div className="App">
-
-            <div>
+      
               <Switch>
             {/* <Route exact path="/" component={Login} /> */}
             <Route component={Profile} />
             <Route exact path="/register" component={Register} />
             <Route path="/profile" component={Profile} />
             </Switch>
-            </div>
-        </div>
+      
       </BrowserRouter>
 
 

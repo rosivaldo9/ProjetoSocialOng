@@ -5,7 +5,7 @@ import { Facebook, Instagram, Email, Person } from '@material-ui/icons';
 const NavBar = (props) => {
     return (
        
-<nav className="navbar navbar-light navconfig a justify-content-between fixed-top" > 
+<nav className="navbar navbar-light navconfig a justify-content-between" > 
   <a className="navbar-brand">Painel administrativo</a>
   <div className="mr-sm-6">
       <ul className="nav">

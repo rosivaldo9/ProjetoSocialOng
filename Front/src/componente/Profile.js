@@ -27,10 +27,10 @@ class Profile extends Component {
 
   render() {
     return (
-      <div>
-        <NavBar />
+      <>
+        {/* <NavBar /> */}
         <SideBar />
-      </div>
+      </>
     )
   }
 }
