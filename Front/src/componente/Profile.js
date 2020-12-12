@@ -28,7 +28,7 @@ class Profile extends Component {
   render() {
     return (
       <>
-        {/* <NavBar /> */}
+        <NavBar />
         <SideBar />
       </>
     )

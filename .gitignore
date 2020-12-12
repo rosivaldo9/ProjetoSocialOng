@@ -1,2 +1,4 @@
-Back/node_modules
-Front/node_modules
+/Back/node_modules
+/Back/src/uploads
+/Front/node_modules
+/Front/build
