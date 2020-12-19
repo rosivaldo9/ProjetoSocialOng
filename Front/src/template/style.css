@@ -5,14 +5,18 @@
     height: 100px;
 }
 
+.navbar-dark .navbar-nav .nav-link {
+    color: rgb(253, 247, 247)
+}
+
 .navbar-dark .navbar-nav .nav-link:hover {
-    color: rgba(137, 223, 80, 0.788);
+    color: rgba(32, 66, 10, 0.788);
 }
 .navbar-dark .navbar-nav .nav-link:focus{
     color: rgba(118, 207, 100, 0.836);
 }
 .nav-link {
-    font-size: 1.5rem;
+    font-size: 1.0rem;
 }
 .aa{
     color: white;
@@ -63,9 +67,6 @@
     position: relative;
 }
 
-
-
-    
 
 .gbutões{
     margin-top: 5px;
@@ -125,12 +126,12 @@
 }
 
 .navconfig{
-    background-image: linear-gradient(to bottom, DarkGreen, LimeGreen);
+    background-image: linear-gradient(to right, Yellow,  Green);
 }
 
 .head{
-      background-image: linear-gradient(to bottom, GreenYellow, YellowGreen);
-      color: white;
+    background-color: #32CD32;
+      
   }
   .botIndex:hover{
     background-image: linear-gradient(to bottom, DarkGreen, LimeGreen);
@@ -138,4 +139,13 @@
 }
 .botIndex{
     color: blue;
+}
+
+.margenSoperior{
+    margin-top: 20px;
+}
+
+.SideColor{
+  /*  background-image: linear-gradient(to right, Yellow,  Green);*/
+  background-color: #32CD32;
 }

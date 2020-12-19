@@ -13,7 +13,11 @@ const UserSchema = new mongoose.Schema({
     },
     password: {
         type: String
+    },
+    nivel:{
+        type: Number
     }
+
 });
 
 

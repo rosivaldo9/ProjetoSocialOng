@@ -28,10 +28,10 @@ export default class SideBar extends Component {
 	render () {
 		return (
 			<Router>
-				<div className="container-fluid">
+				<div className="container-fluid margenSoperior">
 					<div className="row min-vh-100 flex-row">
-						<aside className="col-md-4 col-lg-3 p-0 bg-dark flex-shrink-1">
-							<nav className="navbar navbar-expand navbar-dark bg-dark flex-column align-items-start py-2">
+						<aside className="col-md-3 col-lg-2 p-0  flex-shrink-1 SideColor">
+							<nav className="navbar navbar-expand navbar-dark  flex-column align-items-start py-2 SideColor">
 								<div className="collapse navbar-collapse ml-4">
 									<ul className="flex-column navbar-nav w-100 justify-content-between">
 										{/* visível em tela sm ou menor */}
@@ -70,7 +70,7 @@ export default class SideBar extends Component {
 								</div>
 							</nav>
 						</aside>
-						<main class="col bg-faded py-3 flex-grow-1">
+						<main class="col bg-faded  flex-grow-1">
 							<Switch>
 								<Route path="/profile/publicoatendido" component={Index} />
 								<Route path="/profile/servidor" component={IndexServidor} />

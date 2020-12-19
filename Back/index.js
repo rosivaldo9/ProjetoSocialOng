@@ -30,5 +30,5 @@ app.use('/sistema', require('./src/routes/routes'));
 //porta
 const PORT = process.env.PORT || 8088
 app.listen(PORT, () => {
-    console.log("Server initialized")
+    console.log(`Server initialized com porta ${PORT}`)
 })	

@@ -149,6 +149,9 @@ routes.delete('/Frequencia/:id', Frequencia.delete);//deletar
 routes.post('/user', User.insert);//salvar
 routes.post('/userLogin', User.login);//lista
 routes.get('/user', User.profile);//lista
+routes.get('/listUser', User.index);
+routes.get('/session', User.indexSession);
+
 
 module.exports= routes;
 

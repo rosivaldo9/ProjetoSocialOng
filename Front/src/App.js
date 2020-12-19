@@ -3,7 +3,7 @@ import {hot} from 'react-hot-loader';
 import {BrowserRouter, Switch, Route, Link } from 'react-router-dom';
 import Navbar from './componente/NavBar'
 import Landing from './componente/Landing'
-import Login from './componente/login1'
+import Login from './componente/login'
 import Register from './componente/Register'
 import Profile from './componente/Profile'
 import R from './componente/graficos'
@@ -17,8 +17,7 @@ class App extends Component {
       <BrowserRouter history={history}>
       
               <Switch>
-            {/* <Route exact path="/" component={Login} /> */}
-            <Route component={Profile} />
+             <Route exact path="/" component={Login} /> 
             <Route exact path="/register" component={Register} />
             <Route path="/profile" component={Profile} />
             </Switch>

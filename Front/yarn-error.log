@@ -1,30 +1,29 @@
 Arguments: 
-  /usr/bin/node /usr/local/bin/yarn add @fortawesome/react-fontawesomee
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js install
 
 PATH: 
-  /opt/firefox/firefox:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/joao/Android/Sdk/platform-tools
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\xampp\php;C:\ProgramData\ComposerSetup\bin;C:\HashiCorp\Vagrant\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\nodejs\;C:\Program Files\Git\cmd;C:\Program Files\MongoDB\Server\4.2\bin;C:\Program Files (x86)\Yarn\bin\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\110\Tools\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\Tools\Binn\;C:\Program Files\Microsoft SQL Server\120\DTS\Binn\;C:\Program Files (x86)\Microsoft SQL Server\120\Tools\Binn\ManagementStudio\;C:\Program Files (x86)\Microsoft SQL Server\120\DTS\Binn\;C:\Users\rosiv\AppData\Local\Microsoft\WindowsApps;C:\Users\rosiv\AppData\Roaming\Composer\vendor\bin;C:\Users\rosiv\Documents;C:\Users\rosiv\AppData\Roaming\npm;C:\Program Files\MongoDB\Server\4.2\bin;C:\Users\rosiv\AppData\Local\Yarn\bin;C:\Users\rosiv\AppData\Local\Programs\Microsoft VS Code\bin
 
 Yarn version: 
   1.22.5
 
 Node version: 
-  10.19.0
+  12.16.1
 
 Platform: 
-  linux x64
+  win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@fortawesome%2freact-fontawesomee: Not found
-      at Request.params.callback [as _callback] (/usr/local/lib/node_modules/yarn/lib/cli.js:66988:18)
-      at Request.self.callback (/usr/local/lib/node_modules/yarn/lib/cli.js:140662:22)
-      at Request.emit (events.js:198:13)
-      at Request.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141634:10)
-      at Request.emit (events.js:198:13)
-      at IncomingMessage.<anonymous> (/usr/local/lib/node_modules/yarn/lib/cli.js:141556:12)
-      at Object.onceWrapper (events.js:286:20)
-      at IncomingMessage.emit (events.js:203:15)
-      at endReadableNT (_stream_readable.js:1145:12)
-      at process._tickCallback (internal/process/next_tick.js:63:19)
+  Error: https://registry.yarnpkg.com/@material-ui/core/-/core-3.9.3.tgz: ESOCKETTIMEDOUT
+      at ClientRequest.<anonymous> (C:\Program Files (x86)\Yarn\lib\cli.js:141376:19)
+      at Object.onceWrapper (events.js:417:28)
+      at ClientRequest.emit (events.js:311:20)
+      at TLSSocket.emitRequestTimeout (_http_client.js:714:9)
+      at Object.onceWrapper (events.js:417:28)
+      at TLSSocket.emit (events.js:311:20)
+      at TLSSocket.Socket._onTimeout (net.js:478:8)
+      at listOnTimeout (internal/timers.js:549:17)
+      at processTimers (internal/timers.js:492:7)
 
 npm manifest: 
   {
@@ -34,6 +33,7 @@ npm manifest:
     "dependencies": {
       "@fortawesome/fontawesome-svg-core": "^1.2.32",
       "@fortawesome/free-solid-svg-icons": "^5.15.1",
+      "@fortawesome/react-fontawesome": "^0.1.13",
       "@material-ui/core": "^4.9.14",
       "@material-ui/icons": "^4.9.1",
       "@testing-library/jest-dom": "^4.2.4",
@@ -1289,6 +1289,13 @@ Lockfile:
     integrity sha512-EFMuKtzRMNbvjab/SvJBaOOpaqJfdSap/Nl6hst7CgrJxwfORR1drdTV6q1Ib/JVzq4xObdTDcT6sqTaXMqfdg==
     dependencies:
       "@fortawesome/fontawesome-common-types" "^0.2.32"
+  
+  "@fortawesome/react-fontawesome@^0.1.13":
+    version "0.1.13"
+    resolved "https://registry.yarnpkg.com/@fortawesome/react-fontawesome/-/react-fontawesome-0.1.13.tgz#ce9654bf4e537108014ec022f2423dbe8114fd62"
+    integrity sha512-/HrLnIft5Ks2511Pz6TxHBIctC9QalVscAC64sufQ4sJH/sXaQlG3uR9LCu6VpEwkBemgcBLrz/QPNP/ddbjDg==
+    dependencies:
+      prop-types "^15.7.2"
   
   "@hapi/address@2.x.x":
     version "2.1.4"
